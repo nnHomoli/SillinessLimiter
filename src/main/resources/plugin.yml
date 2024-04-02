@@ -1,0 +1,4 @@
+name: IP lock
+version: '${project.version}'
+main: justaplugin.sillinesslimiter.IPLock
+api-version: '1.20'
