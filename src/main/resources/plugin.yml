@@ -12,6 +12,6 @@ commands:
         usage: /unlimit-silly
         permission: justaplugin.sillinesslimiter.unlimitsilly
     silly-reload:
-        description: "Reload Silliness limiter config"
-        usage: /reload-silly
+        description: "Reload SillinessLimiter config"
+        usage: /silly-reload
         permission: justaplugin.sillinesslimiter.sillyreload
