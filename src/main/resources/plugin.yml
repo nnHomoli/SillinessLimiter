@@ -3,15 +3,15 @@ version: '${project.version}'
 main: justaplugin.sillinesslimiter.IPLock
 api-version: '1.20'
 commands:
-    limitsilly:
+    limit-silly:
         description: "Locking IP on your account"
-        usage: /limitsilly
+        usage: /limit-silly
         permission: justaplugin.sillinesslimiter.limitsilly
-    unlimitsilly:
+    unlimit-silly:
         description: "Unlocking IP on your account"
-        usage: /unlimitsilly
+        usage: /unlimit-silly
         permission: justaplugin.sillinesslimiter.unlimitsilly
-    reloadsilly:
+    silly-reload:
         description: "Reload Silliness limiter config"
-        usage: /reloadsilly
-        permission: justaplugin.sillinesslimiter.reloadsilly
+        usage: /reload-silly
+        permission: justaplugin.sillinesslimiter.sillyreload
