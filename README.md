@@ -2,7 +2,7 @@
 
 ## Description
 
-SillinessLimiter is a little strange ip to name lock, but the one that provides more freedom to the player
+SillinessLimiter is a little strange iplock, but the one that provides more freedom to the player
 
 Mainly for the offline servers, because login:password are miserable
 
