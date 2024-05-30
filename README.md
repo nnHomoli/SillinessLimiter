@@ -4,8 +4,7 @@
 
 SillinessLimiter is a little strange iplock with the intention of providing freedom to the player while ensuring his safety and being simple
 
-Mainly for the offline servers
-
+useful for offline server
 Meant to be used somewhere else, but left unused, so I decided to finish it and make it public
 
 ## Commands
