@@ -17,7 +17,7 @@ Meant to be used somewhere else, but left unused, so I decided to finish it and 
 -- unlinks you name from any ip that's currently there, needs confirmation. If you're server op or have access to console, you can unlink someone's ip without confirmation
 
 #### _/silly-move_
--- plugins for players to safely change their linked ip to whatever they want, needs confirmation
+-- command for players to safely change their linked ip to whatever they want, needs confirmation
 
 #### _/silly-confirm_
 -- just to confirm changes, nothing else
