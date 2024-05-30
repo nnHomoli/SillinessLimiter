@@ -18,8 +18,9 @@ public class limitsilly implements CommandExecutor, TabCompleter {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if(args.length == 0) {
-                if (IPLock.getPlugin(IPLock.class).getConfig().get(player.getName()) != null) {
-                    player.sendMessage(ChatColor.GOLD + "Silliness has already been limited");
+                if (IPLock.getPlugin(IPLock.class).getConfig().get(player.getName()) != null || IPLock.confirmations.containsKey(player)) {
+                    if(IPLock.confirmations.containsKey(player)) player.sendMessage(ChatColor.RED + "You have yet to confirm previous change");
+                    else player.sendMessage(ChatColor.GOLD + "Silliness has already been limited");
                     return true;
                 }
                 IPLock.getPlugin(IPLock.class).getConfig().set(player.getName(), player.getAddress().getAddress().getHostAddress());

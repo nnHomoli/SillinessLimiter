@@ -3,15 +3,27 @@ version: '${project.version}'
 main: justaplugin.sillinesslimiter.IPLock
 api-version: '1.20'
 commands:
-    limit-silly:
+    silly-limit:
         description: "Locking IP on your account"
-        usage: /limit-silly
-        permission: justaplugin.sillinesslimiter.limitsilly
-    unlimit-silly:
+        usage: /silly-limit
+        permission: justaplugin.sillinesslimiter.sillylimit
+    silly-unlimit:
         description: "Unlocking IP on your account"
-        usage: /unlimit-silly
-        permission: justaplugin.sillinesslimiter.unlimitsilly
+        usage: /silly-unlimit
+        permission: justaplugin.sillinesslimiter.sillyunlimit
     silly-reload:
         description: "Reload SillinessLimiter config"
         usage: /silly-reload
         permission: justaplugin.sillinesslimiter.sillyreload
+    silly-confirm:
+        description: "Confirming IP change"
+        usage: /silly-confirm
+        permission: justaplugin.sillinesslimiter.sillyconfirm
+    silly-move:
+        description: "Moving name to another IP"
+        usage: /silly-move
+        permission: justaplugin.sillinesslimiter.sillymove
+    silly-deny:
+        description: "Denying IP change"
+        usage: /silly-deny
+        permission: justaplugin.sillinesslimiter.sillydeny
