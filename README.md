@@ -31,7 +31,7 @@ Meant to be used somewhere else, but left unused, so I decided to finish it and 
 ## Config
 
 #### _Permission-by-default_
--- grants every permission of this plugin, except reload. True by default
+-- grants every permission of this plugin commands, except reload. True by default
 
 #### _Login-link-message_
 -- send a message to the player that has no ip linked. True by default
