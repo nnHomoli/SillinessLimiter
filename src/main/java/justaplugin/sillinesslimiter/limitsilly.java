@@ -19,7 +19,7 @@ public class limitsilly implements CommandExecutor, TabCompleter {
             Player player = (Player) sender;
             if(args.length == 0) {
                 if (IPLock.getPlugin(IPLock.class).getConfig().get(player.getName()) != null || IPLock.confirmations.containsKey(player)) {
-                    if(IPLock.confirmations.containsKey(player)) player.sendMessage(ChatColor.RED + "You have yet to confirm previous change");
+                    if(IPLock.confirmations.containsKey(player)) player.sendMessage(IPLock.busy);
                     else player.sendMessage(ChatColor.GOLD + "Silliness has already been limited");
                     return true;
                 }
@@ -41,7 +41,7 @@ public class limitsilly implements CommandExecutor, TabCompleter {
             IPLock.getPlugin(IPLock.class).reloadConfig();
 
             if(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0])) && !Objects.equals(IPLock.getPlugin(IPLock.class).getConfig().get(args[0]), Bukkit.getPlayer(args[0]).getAddress().getAddress().getHostAddress())) {
-                Bukkit.getPlayer(args[0]).kickPlayer(ChatColor.RED + "trying to limit your silliness\n\n" + ChatColor.AQUA + " you joined on account with other ip already linked to it");
+                Bukkit.getPlayer(args[0]).kickPlayer(IPLock.reason);
             }
 
             if(sender instanceof Player) sender.sendMessage(ChatColor.RED + args[0] + " has been linked");

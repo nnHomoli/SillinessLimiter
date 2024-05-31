@@ -16,7 +16,7 @@ public class movesilly implements CommandExecutor, TabCompleter {
             Player p = (Player) sender;
 
             if(IPLock.confirmations.containsKey(p)) {
-                p.sendMessage(ChatColor.RED + "You have yet to confirm previous change");
+                p.sendMessage(IPLock.busy);
                 return true;
             }
 

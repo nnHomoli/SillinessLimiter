@@ -22,7 +22,7 @@ public class sillyconfirm implements CommandExecutor {
 
                 p.sendMessage(ChatColor.GOLD + ((IPLock.confirmations.get(p) != null) ? "Silliness has been limited" : "Silliness has been unlimited"));
                 IPLock.getPlugin(IPLock.class).getLogger().info(sender.getName() + ((IPLock.confirmations.get(p) != null) ? " has been linked" : " has been unlinked"));
-                if(IPLock.confirmations.get(p) != null && !Objects.equals(IPLock.getPlugin(IPLock.class).getConfig().get(p.getName()), p.getAddress().getAddress().getHostAddress())) p.kickPlayer(ChatColor.RED + "trying to limit your silliness\n\n" + ChatColor.AQUA + " you joined on account with other ip already linked to it");
+                if(IPLock.confirmations.get(p) != null && !Objects.equals(IPLock.getPlugin(IPLock.class).getConfig().get(p.getName()), p.getAddress().getAddress().getHostAddress())) p.kickPlayer(IPLock.reason);
 
                 IPLock.confirmations.remove(p);
             } else sender.sendMessage(ChatColor.RED + "Nothing to confirm");

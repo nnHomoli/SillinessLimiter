@@ -13,6 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.*;
 
 public final class IPLock extends JavaPlugin implements Listener {
+    public static String reason = ChatColor.RED + "Trying to limit your silliness\n\n" + ChatColor.AQUA + " You joined the account with other ip already linked to it";
+    public static String busy = ChatColor.RED + "You have yet to confirm or deny the previous change";
     public static HashMap<Player, String> confirmations = new HashMap<>();
     HashMap<UUID, PermissionAttachment> attachments = new HashMap<>();
     ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("justaplugin.sillinesslimiter.sillylimit"),
@@ -50,7 +52,7 @@ public final class IPLock extends JavaPlugin implements Listener {
         }
         else if(!Objects.equals(this.getConfig().get(player.getName()), player.getAddress().getAddress().getHostAddress())) {
                 event.setJoinMessage(null);
-                player.kickPlayer(ChatColor.RED + "trying to limit your silliness\n\n" + ChatColor.AQUA + " you joined on account with other ip already linked to it");
+                player.kickPlayer(reason);
             }
     }
 

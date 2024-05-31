@@ -17,7 +17,7 @@ public class unlimitsilly implements CommandExecutor {
                 Player p = (Player) sender;
 
                 if (IPLock.getPlugin(IPLock.class).getConfig().get(p.getName()) == null || IPLock.confirmations.containsKey(p)) {
-                    if(IPLock.confirmations.containsKey(p)) p.sendMessage(ChatColor.RED + "You have yet to confirm previous change");
+                    if(IPLock.confirmations.containsKey(p)) p.sendMessage(IPLock.busy);
                     else p.sendMessage(ChatColor.GOLD + "No silliness to unlimit");
                     return true;
                 }
