@@ -6,7 +6,7 @@ SillinessLimiter is a little strange iplock with the intention of providing free
 
 Useful for offline servers
 
-Meant to be used somewhere else, but left unused, so I decided to finish it and make it public
+It was meant to be used somewhere but left unused, so I decided to finish it and make it public.
 
 ## Commands
 
