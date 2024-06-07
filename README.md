@@ -32,7 +32,7 @@ Also includes customizable language file
 -- just to deny changes, nothing else
 
 #### _/silly-reload_
--- config reload, op or console only
+-- config and language reload, server op and console only
 
 ## Config
 
