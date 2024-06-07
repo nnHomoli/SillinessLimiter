@@ -40,7 +40,7 @@ Also includes customizable language file
 -- grants every permission of this plugin commands, except reload, true by default
 
 #### _Login-link-message_
--- Display a message when you join if player ip is not linked, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
+-- Display a message when player whose IP is not linked joins, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
 
 #### _Max-IP-Allowed_
 -- The maximum number of ip that can be linked to the same account, 4 by default
