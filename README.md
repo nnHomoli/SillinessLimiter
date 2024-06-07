@@ -15,10 +15,10 @@ Also includes customizable language file
 ## Commands
 
 #### _/silly-limit_ 
--- limits your account to ip address you are currently on, needs confirmation. If you're server op or have access to console, you can limit someone to specific ip by arguments
+-- links your account to ip address you are currently on, needs confirmation. Can be used with an argument to link a specific IP
 
 #### _/silly-unlimit_ 
--- unlinks you account from any ip that's currently there, needs confirmation.
+-- if linked, it unlinks your account from the currently used IP and needs confirmation. Can be used with an argument to unlink a specific IP
 
 #### _/silly-list_ 
 -- shows the list of linked ips to your account
