@@ -19,11 +19,11 @@ commands:
         description: "Confirming IP change"
         usage: /silly-confirm
         permission: justaplugin.sillinesslimiter.sillyconfirm
-    silly-move:
-        description: "Moving name to another IP"
-        usage: /silly-move
-        permission: justaplugin.sillinesslimiter.sillymove
     silly-deny:
         description: "Denying IP change"
         usage: /silly-deny
         permission: justaplugin.sillinesslimiter.sillydeny
+    silly-list:
+        description: "List of linked IPs"
+        usage: /silly-list
+        permission: justaplugin.sillinesslimiter.sillylist

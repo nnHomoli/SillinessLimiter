@@ -1,7 +1,5 @@
 package justaplugin.sillinesslimiter;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,51 +7,53 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.Objects;
 
 public class limitsilly implements CommandExecutor, TabCompleter {
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
-            if(args.length == 0) {
-                if (IPLock.getPlugin(IPLock.class).getConfig().get(player.getName()) != null || IPLock.confirmations.containsKey(player)) {
-                    if(IPLock.confirmations.containsKey(player)) player.sendMessage(IPLock.busy);
-                    else player.sendMessage(ChatColor.GOLD + "Silliness has already been limited");
-                    return true;
-                }
-                IPLock.getPlugin(IPLock.class).getConfig().set(player.getName(), player.getAddress().getAddress().getHostAddress());
-                IPLock.getPlugin(IPLock.class).saveConfig();
-                IPLock.getPlugin(IPLock.class).reloadConfig();
-
-                player.sendMessage(ChatColor.RED + "ip linked" + ChatColor.GOLD + ", silliness has been limited");
-                IPLock.getPlugin(IPLock.class).getLogger().info(player.getName() + " has been linked");
-            }
-        }
-        if(sender.isOp() && args.length == 2) {
-            if (IPLock.getPlugin(IPLock.class).getConfig().get(args[0]) != null) {
-                sender.sendMessage(ChatColor.GOLD + "Silliness has already been limited");
+            Player p = (Player) sender;
+            List<?> ip = IPLock.getPlugin(IPLock.class).getConfig().getList(p.getName());
+            if (IPLock.confirmations.containsKey(p)) {
+                p.sendMessage(IPLock.lang.get("confirm_busy"));
                 return true;
             }
-            IPLock.getPlugin(IPLock.class).getConfig().set(args[0], args[1]);
-            IPLock.getPlugin(IPLock.class).saveConfig();
-            IPLock.getPlugin(IPLock.class).reloadConfig();
 
-            if(Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[0])) && !Objects.equals(IPLock.getPlugin(IPLock.class).getConfig().get(args[0]), Bukkit.getPlayer(args[0]).getAddress().getAddress().getHostAddress())) {
-                Bukkit.getPlayer(args[0]).kickPlayer(IPLock.reason);
+            if(ip != null && ip.size() >= 4) {
+                p.sendMessage(IPLock.lang.get("maximum_reached"));
+                return true;
             }
 
-            if(sender instanceof Player) sender.sendMessage(ChatColor.RED + args[0] + " has been linked");
-            IPLock.getPlugin(IPLock.class).getLogger().info(args[0] + " has been linked");
-        }
+            if (args.length == 1) {
+                if (!IPLock.ip_pattern.matcher(args[0]).matches()) {
+                    p.sendMessage(IPLock.lang.get("invalid_ip"));
+                    return true;
+                }
+                if (ip != null && ip.contains(args[0])) {
+                    p.sendMessage(IPLock.lang.get("limit_already_there"));
+                    return true;
+                }
 
+                IPLock.confirmations.put(p, args[0]);
+                p.sendMessage(IPLock.lang.get("limit_that"));
+
+            } else {
+                if (ip != null && ip.contains(p.getAddress().getAddress().getHostAddress())) {
+                    p.sendMessage(IPLock.lang.get("limit_already_there"));
+                    return true;
+                }
+
+                IPLock.confirmations.put(p, p.getAddress().getAddress().getHostAddress());
+                p.sendMessage(IPLock.lang.get("limit_this"));
+            }
+        }
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        if(sender.isOp() && strings.length == 2) return List.of("<<ip here>>");;
+        List ip = IPLock.getPlugin(IPLock.class).getConfig().getList(sender.getName());
+        if(strings.length == 1 && ip != null) return ip;
         return null;
     }
 }

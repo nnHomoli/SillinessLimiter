@@ -1,0 +1,58 @@
+##             ---Color Formatting Guide---                                   --Variable Guide--
+##             %GREEN% = Green                                  the only variable you can use is ip in /silly-list
+##             %MAGIC% = Magic                                                       %IP%
+##             %AQUA% = Aqua
+##             %BOLD% = Bold
+##             %ITALIC% = Italic
+##             %STRIKETHROUGH% = Strikethrough
+##             %UNDERLINE% = Underline
+##             %RESET% = Reset
+##             %BLACK% = Black
+##             %DARK_BLUE% = Dark Blue
+##             %DARK_GREEN% = Dark Green
+##             %DARK_AQUA% = Dark Aqua
+##             %DARK_RED% = Dark Red
+##             %DARK_PURPLE% = Dark Purple
+##             %GOLD% = Gold
+##             %GRAY% = Gray
+##             %DARK_GRAY% = Dark Gray
+##             %BLUE% = Blue
+##             %GREEN% = Green
+##             %AQUA% = Aqua
+##             %RED% = Red
+##             %RESET% = Reset
+
+deny: "%GOLD%%BOLD%Successfully denied the previous change"
+deny_nothing: "%RED%Nothing to deny"
+
+confirm_busy: "%RED%%BOLD%You have yet to confirm or deny the previous change"
+confirm_nothing: "%RED%Nothing to confirm"
+
+kick_reason:  "%RED%%BOLD%Trying to limit your silliness\n\n%AQUA% You joined the account with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
+login_link_message: "%RED%Your ip is not linked, your game might be at risk, use %BOLD%/silly-limit%RESET%%RED% to protect your account"
+
+plugin_reload: "%GOLD%%BOLD%Reloaded the silly"
+
+maximum_reached: "%RED%You reached the maximum number of %BOLD%IP%RESET%%RED% that can be linked to the same account"
+
+unlimit_fail: "%GOLD%No silliness to %BOLD%unlimit"
+unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited"
+
+unlimit_this: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+unlimit_that: "%YELLOW%Are you sure you want to unlink this %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+invalid_ip: "%RED%%BOLD%Invalid IP address"
+
+limit_already_there: "%GOLD%Silliness has already been %BOLD%limited"
+limit_success: "%GOLD%Silliness has been %BOLD%limited"
+
+limit_this: "%YELLOW%Are you sure you want to link your current %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+## Silly-list menu
+header: "%GOLD%⏶ ====================="
+
+ips: "%AQUA%\n|| %DARK_AQUA%%BOLD% %IP%"
+no_ips: "%RED%\n|| %DARK_RED% No ips linked"
+
+bottom: "%GOLD%\n⏷ ====================="
