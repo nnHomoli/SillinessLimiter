@@ -20,7 +20,7 @@ public class sillylist implements CommandExecutor {
             if(ip != null) ip.forEach(st -> text.append(IPLock.lang.get("ips").replace("%IP%", st.toString())));
             else text.append(IPLock.lang.get("no_ips"));
             text.append(IPLock.lang.get("bottom"));
-            text.append("\n");
+            text.append("\n ");
 
             p.sendMessage(text.toString());
         }
