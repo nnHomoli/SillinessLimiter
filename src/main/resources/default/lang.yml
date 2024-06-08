@@ -52,7 +52,7 @@ limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET
 ## Silly-list menu
 header: "%GOLD%⏶ ====================="
 
-ips: "%AQUA%\n|| %DARK_AQUA%%BOLD% %IP%"
-no_ips: "%RED%\n|| %DARK_RED% No ips linked"
+ips: "%AQUA%|| %DARK_AQUA%%BOLD% %IP%"
+no_ips: "%RED%|| %DARK_RED%%BOLD% No ips linked"
 
 bottom: "%GOLD%\n⏷ ====================="

@@ -51,7 +51,7 @@ public final class IPLock extends JavaPlugin implements Listener {
     public void onLogin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
 
-        if(IPLock.getPlugin(IPLock.class).getConfig().getBoolean("Permission-by-default")) {
+        if(this.getConfig().getBoolean("Permission-by-default")) {
             PermissionAttachment at = p.addAttachment(this);
             perms.forEach(per -> {
                 at.setPermission(per, true);
