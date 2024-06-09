@@ -12,7 +12,7 @@ commands:
         usage: /silly-unlimit
         permission: justaplugin.sillinesslimiter.sillyunlimit
     silly-reload:
-        description: "Reload SillinessLimiter config"
+        description: "Reload SillinessLimiter config and language"
         usage: /silly-reload
         permission: justaplugin.sillinesslimiter.sillyreload
     silly-confirm:
