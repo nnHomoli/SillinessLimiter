@@ -98,6 +98,10 @@ public final class IPLock extends JavaPlugin implements Listener {
             this.getConfig().set("Max-IP-Allowed", 4);
             this.getConfig().setComments("Max-IP-Allowed", List.of("The maximum number of ip that can be linked to the same name, 4 by default"));
         }
+        if(this.getConfig().get("check-after-confirm") == null) {
+            this.getConfig().set("check-after-confirm", false);
+            this.getConfig().setComments("check-after-confirm", List.of("Check if player ip is still linked after confirm, false by default"));
+        }
 
         this.saveConfig();
         this.reloadConfig();

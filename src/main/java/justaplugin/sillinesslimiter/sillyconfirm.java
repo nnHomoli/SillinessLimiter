@@ -33,7 +33,8 @@ public class sillyconfirm implements CommandExecutor {
 
                 p.sendMessage(ChatColor.GOLD + ((ip != null && ip.contains(IPLock.confirmations.get(p))) ? IPLock.lang.get("limit_success") : IPLock.lang.get("unlimit_success")));
                 IPLock.log.info(sender.getName() + ((IPLock.confirmations.get(p) != null) ? " has been linked" : " has been unlinked"));
-                if(ip != null && !ip.contains(p.getAddress().getAddress().getHostAddress())) p.kickPlayer(IPLock.lang.get("kick_reason"));
+                if(IPLock.getPlugin(IPLock.class).getConfig().getBoolean("check-after-confirm") && ip != null &&
+                        !ip.contains(p.getAddress().getAddress().getHostAddress())) p.kickPlayer(IPLock.lang.get("kick_reason"));
 
                 IPLock.confirmations.remove(p);
             } else sender.sendMessage(IPLock.lang.get("confirm_nothing"));
