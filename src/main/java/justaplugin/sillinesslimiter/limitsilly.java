@@ -19,7 +19,7 @@ public class limitsilly implements CommandExecutor, TabCompleter {
                 return true;
             }
 
-            if(ip != null && ip.size() >= 4) {
+            if(ip != null && ip.size() >= IPLock.getPlugin(IPLock.class).getConfig().getInt("Max-IP-Allowed")) {
                 p.sendMessage(IPLock.lang.get("maximum_reached"));
                 return true;
             }
