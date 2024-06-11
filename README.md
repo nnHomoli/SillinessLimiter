@@ -43,10 +43,10 @@ Also includes customizable language file
 -- Display a message when player whose IP is not linked joins, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
 
 #### _Max-IP-Allowed_ ## Int value
--- The maximum number of ip that can be linked to the same account, 4 by default
+-- The maximum number of IP that can be linked to the same account, 4 by default
 
 #### _check-after-confirm_ ## true/false
--- Check if player ip is still linked after confirm, false by default
+-- Check if player IP is still linked after confirm, false by default
 
 ## Language
 -- For more info about this one, check [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml)
