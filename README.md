@@ -15,13 +15,13 @@ Also includes customizable language file
 ## Commands
 
 #### _/silly-limit_ 
--- links your account to ip address you are currently on, needs confirmation. Can be used with an argument to link a specific IP
+-- links your account to IP address you are currently on, needs confirmation. Can be used with an argument to link a specific IP
 
 #### _/silly-unlimit_ 
 -- if linked, it unlinks your account from the currently used IP and needs confirmation. Can be used with an argument to unlink a specific IP
 
 #### _/silly-list_ 
--- shows the list of linked ips to your account
+-- shows the list of linked IPs to your account
 
 ![](.README_images/ece83f9d.png)
 
