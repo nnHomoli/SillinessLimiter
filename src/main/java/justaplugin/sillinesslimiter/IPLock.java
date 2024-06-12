@@ -81,7 +81,7 @@ public final class IPLock extends JavaPlugin implements Listener {
         // Plugin load logic
         log = this.getLogger();
 
-        if(this.getConfig().get("version") == null) {
+        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.1")) {
             this.getConfig().set("version", "1.1");
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
