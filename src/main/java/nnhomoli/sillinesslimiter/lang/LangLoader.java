@@ -1,6 +1,6 @@
-package justaplugin.sillinesslimiter.lang;
+package nnhomoli.sillinesslimiter.lang;
 
-import justaplugin.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.IPLock;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 

@@ -1,8 +1,8 @@
 ##             ---Color Formatting Guide---                                   --Variable Guide--
-##             %GREEN% = Green                                  the only variable you can use is in /silly-list "ips"
-##             %MAGIC% = Magic                                                       %IP%
-##             %AQUA% = Aqua
-##             %BOLD% = Bold
+##             %GREEN% = Green                                   the only variable you can use is in /silly-list
+##             %MAGIC% = Magic                                               %IP% = IP, onlu in ips
+##             %AQUA% = Aqua                                %AUTHSTATUS% = Auth status, returns auth_on or auth_off, only header/bottom
+##             %BOLD% = Bold                                          %IPD% = Dynamic IP, onlu in dynamic_ip
 ##             %ITALIC% = Italic
 ##             %STRIKETHROUGH% = Strikethrough
 ##             %UNDERLINE% = Underline
@@ -22,12 +22,77 @@
 ##             %RED% = Red
 ##             %RESET% = Reset
 
+##silly-help
+help: "\n%GOLD%⏶ ========|%BOLD%%RED%SillinessLimiter Help%RESET%%GOLD%|==============
+%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-help --%RESET%%YELLOW% display this message 
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-list --%RESET%%YELLOW% list all linked IPs
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-switch --%RESET%%YELLOW% switch auth status
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-confirm --%RESET%%YELLOW% confirm the change
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-deny --%RESET%%YELLOW% deny the change
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-reload --%RESET%%YELLOW% reload config and language
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-dynamic-limit --%RESET%%YELLOW% link dynamic IP
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-dynamic-unlimit --%RESET%%YELLOW% unlink dynamic IP
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-limit --%RESET%%YELLOW% link IP
+%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-unlimit --%RESET%%YELLOW% unlink IP
+\n%GOLD%⏷ ========|%BOLD%%RED%SillinessLimiter Help%RESET%%GOLD%|==============\n "
+
+##silly-deny
 deny: "%GOLD%%BOLD%Successfully denied the previous change"
 deny_nothing: "%RED%Nothing to deny"
 
+##silly-confirm
 confirm_busy: "%RED%%BOLD%You have yet to confirm or deny the previous change"
 confirm_nothing: "%RED%Nothing to confirm"
 
+##silly-switch
+switch_to_true: "%YELLOW%Are you sure you want to change your account %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %GREEN%%BOLD%enabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+switch_to_false: "%YELLOW%Are you sure you want to change your account %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %RED%%BOLD%disabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+auth_enable: "%GOLD%Auth has been %GREEN%%BOLD%enabled"
+auth_disable: "%GOLD%Auth has been %RED%%BOLD%disabled"
+
+##silly-unlimit
+unlimit_fail: "%GOLD%No silliness to %BOLD%unlimit"
+unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited"
+
+unlimit_this: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%address%RESET%%YELLOW%\nfrom your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+unlimit_that: "%YELLOW%Are you sure you want to unlink this %RED%%BOLD%address%RESET%%YELLOW%\nfrom your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+##silly-dynamic-limit
+dynamic_already_there: "%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been limited %BOLD%dynamically"
+dynamic_success: "%GOLD%Silliness has been limited %BOLD%dynamically"
+
+invalid_dynamic_ip: "%RED%%BOLD%Invalid dynamic IP address%RESET%%RED%, please use asterisk ( * ) after %BOLD%first/second/third%RESET%%RED% octets"
+
+dynamic_limit_this: "%YELLOW%Are you sure you want to link your current %RED%%BOLD%address%RESET%%YELLOW%\nto your account as dynamic IP?%DARK_RED%\nBy using this option, it will be defaulted\nto the second octet of your current one%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+dynamic_limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto your account as dynamic IP?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+##silly-dynamic-unlimit
+dynamic_unlimit_not_linked: "%GOLD%No silliness to %BOLD%unlimit%RESET%%GOLD% dynamically"
+dynamic_unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited%RESET%%GOLD%"
+
+dynamic_unlimit: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%\ndynamic address%RESET%%YELLOW%\nfrom your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+##silly-limit
+invalid_ip: "%RED%%BOLD%Invalid IP address"
+
+limit_already_there: "%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been %BOLD%limited"
+limit_success: "%GOLD%Silliness has been %BOLD%limited"
+
+limit_this: "%YELLOW%Are you sure you want to link your current %RED%%BOLD%address%RESET%%YELLOW%\nto your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+
+## Silly-list menu
+header: "%GOLD%⏶ ====================="
+
+ips: "%AQUA%|| %DARK_AQUA%%BOLD% %IP%"
+no_ips: "%RED%|| %DARK_RED%%BOLD% No IPS linked"
+dynamic_ip: "%AQUA%|| %BLUE%%BOLD% !!  %IPD% -- dynamic !!"
+no_dynamic_ip: "%RED%|| %DARK_RED%%BOLD% no dynamic IPS linked"
+
+bottom: "%GOLD%\n⏷ ======|%AUTHSTATUS%%RESET%%GOLD%|======"
+
+##misc
 kick_reason:  "%RED%%BOLD%Trying to limit your silliness\n\n%AQUA% You joined the account with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
 login_link_message: "%RED%Your ip is not linked, your game might be at risk, use %BOLD%/silly-limit%RESET%%RED% to protect your account"
 
@@ -35,24 +100,5 @@ plugin_reload: "%GOLD%%BOLD%Reloaded the silly"
 
 maximum_reached: "%RED%You reached the maximum number of %BOLD%IP%RESET%%RED% that can be linked to the same account"
 
-unlimit_fail: "%GOLD%No silliness to %BOLD%unlimit"
-unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited"
-
-unlimit_this: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-unlimit_that: "%YELLOW%Are you sure you want to unlink this %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-
-invalid_ip: "%RED%%BOLD%Invalid IP address"
-
-limit_already_there: "%GOLD%Silliness has already been %BOLD%limited"
-limit_success: "%GOLD%Silliness has been %BOLD%limited"
-
-limit_this: "%YELLOW%Are you sure you want to link your current %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET%%YELLOW% from your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-
-## Silly-list menu
-header: "%GOLD%⏶ ====================="
-
-ips: "%AQUA%|| %DARK_AQUA%%BOLD% %IP%"
-no_ips: "%RED%|| %DARK_RED%%BOLD% No ips linked"
-
-bottom: "%GOLD%\n⏷ ====================="
+auth_on: "%GREEN%%BOLD%enabled"
+auth_off: "%RED%%BOLD%disabled"

@@ -1,10 +1,13 @@
-package justaplugin.sillinesslimiter;
+package nnhomoli.sillinesslimiter;
 
-import justaplugin.sillinesslimiter.lang.LangLoader;
+import nnhomoli.sillinesslimiter.data.*;
+import nnhomoli.sillinesslimiter.cmds.*;
+import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import org.bukkit.permissions.Permission;
@@ -18,31 +21,44 @@ import java.util.regex.Pattern;
 
 public final class IPLock extends JavaPlugin implements Listener {
     public static Logger log;
+    public static data pdata;
     public static LangLoader lang;
+    public static ArrayList<Pattern> dynamic_ranges = new ArrayList<>(Arrays.asList(
+                    Pattern.compile("(\\d{1,3}\\.)\\*"),
+                    Pattern.compile("(\\d{1,3}\\.\\d{1,3}\\.)\\*"),
+                    Pattern.compile("(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.)\\*")));
     public static Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
 
-    public static HashMap<Player, String> confirmations = new HashMap<>();
-    ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("justaplugin.sillinesslimiter.sillylimit"),
-            new Permission("justaplugin.sillinesslimiter.sillyunlimit"),
-            new Permission("justaplugin.sillinesslimiter.sillyconfirm"),
-            new Permission("justaplugin.sillinesslimiter.sillymove"),
-            new Permission("justaplugin.sillinesslimiter.sillydeny"),
-            new Permission("justaplugin.sillinesslimiter.sillylist")));
+    public static HashMap<Player, Object> confirmations = new HashMap<>();
+    ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("nnhomoli.sillinesslimiter.cmds.sillyunlimit"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillylimit"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillyconfirm"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillydeny"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillylist"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillyswitch"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillydynamiclimit"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit"),
+            new Permission("nnhomoli.sillinesslimiter.cmds.sillyhelp")));
 
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        this.getCommand("silly-limit").setExecutor(new limitsilly());
-        this.getCommand("silly-unlimit").setExecutor(new unlimitsilly());
+        this.getCommand("silly-limit").setExecutor(new sillylimit());
+        this.getCommand("silly-unlimit").setExecutor(new sillyunlimit());
         this.getCommand("silly-confirm").setExecutor(new sillyconfirm());
         this.getCommand("silly-deny").setExecutor(new sillydeny());
+        this.getCommand("silly-switch").setExecutor(new sillyswitch());
         this.getCommand("silly-reload").setExecutor(new sillyreload());
         this.getCommand("silly-list").setExecutor(new sillylist());
+        this.getCommand("silly-dynamic-limit").setExecutor(new sillydynamiclimit());
+        this.getCommand("silly-dynamic-unlimit").setExecutor(new sillydynamicunlimit());
+        this.getCommand("silly-help").setExecutor(new sillyhelp());
+
 
         getServer().getPluginManager().registerEvents(this, this);
     }
@@ -50,7 +66,6 @@ public final class IPLock extends JavaPlugin implements Listener {
     @EventHandler
     public void onLogin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-
         if(this.getConfig().getBoolean("Permission-by-default")) {
             PermissionAttachment at = p.addAttachment(this);
             perms.forEach(per -> {
@@ -58,22 +73,25 @@ public final class IPLock extends JavaPlugin implements Listener {
             });
             p.updateCommands();
         }
-
-        //1.0 to 1.1 converter
-        if(this.getConfig().getString(p.getName()) != null && this.getConfig().getList(p.getName()) == null) {
-            this.getConfig().set(p.getName(), List.of(this.getConfig().getString(p.getName())));
-            this.saveConfig();
-            log.info("Converted " + p.getName() + " from 1.0 to 1.1");
-        };
-
-        if(this.getConfig().getList(p.getName()) == null) {
+        if(pdata.getList(p.getName()) == null && pdata.get(p.getName() + ";dynamic") == null || !IPLock.pdata.isEnabled(p.getName())) {
             if(this.getConfig().getBoolean("Login-link-message")) p.sendMessage(lang.get("login_link_message"));
         }
+    }
 
-        else if(!this.getConfig().getList(p.getName()).contains(p.getAddress().getAddress().getHostAddress())) {
-                event.setJoinMessage(null);
-                p.kickPlayer(lang.get("kick_reason"));
+    @EventHandler
+    public void preLogin(AsyncPlayerPreLoginEvent event) {
+        String p = event.getName();
+
+        converter.convert(p, this);
+        List<Object> ip = pdata.getList(p);
+        Object dynamic = pdata.get(p + ";dynamic");
+
+        if(IPLock.pdata.isEnabled(p)) {
+            if (ip != null && !ip.contains(event.getAddress().getHostAddress()) ||
+                    dynamic != null && !Pattern.compile(dynamic.toString()).matcher(event.getAddress().getHostAddress()).matches()) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, lang.get("kick_reason"));
             }
+        }
     }
 
     @Override
@@ -81,8 +99,8 @@ public final class IPLock extends JavaPlugin implements Listener {
         // Plugin load logic
         log = this.getLogger();
 
-        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.1")) {
-            this.getConfig().set("version", "1.1");
+        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2")) {
+            this.getConfig().set("version", "1.2");
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
 
@@ -109,6 +127,9 @@ public final class IPLock extends JavaPlugin implements Listener {
         lang = new LangLoader();
         lang.load(this);
 
+        pdata = new data();
+        pdata.load(this);
+
         log.info("Silliness limiter Has been loaded");
 
     }
@@ -116,5 +137,6 @@ public final class IPLock extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        pdata.save();
     }
 }

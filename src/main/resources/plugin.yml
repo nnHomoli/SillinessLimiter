@@ -1,29 +1,45 @@
 name: SillinessLimiter
 version: '${project.version}'
-main: justaplugin.sillinesslimiter.IPLock
+main: nnhomoli.sillinesslimiter.IPLock
 api-version: '1.20'
 commands:
     silly-limit:
         description: "Locking IP on your account"
         usage: /silly-limit
-        permission: justaplugin.sillinesslimiter.sillylimit
+        permission: nnhomoli.sillinesslimiter.cmds.sillylimit
     silly-unlimit:
         description: "Unlocking IP on your account"
         usage: /silly-unlimit
-        permission: justaplugin.sillinesslimiter.sillyunlimit
+        permission: nnhomoli.sillinesslimiter.cmds.sillyunlimit
     silly-reload:
         description: "Reload SillinessLimiter config and language"
         usage: /silly-reload
-        permission: justaplugin.sillinesslimiter.sillyreload
+        permission: nnhomoli.sillinesslimiter.cmds.sillyreload
     silly-confirm:
         description: "Confirming IP change"
         usage: /silly-confirm
-        permission: justaplugin.sillinesslimiter.sillyconfirm
+        permission: nnhomoli.sillinesslimiter.cmds.sillyconfirm
     silly-deny:
         description: "Denying IP change"
         usage: /silly-deny
-        permission: justaplugin.sillinesslimiter.sillydeny
+        permission: nnhomoli.sillinesslimiter.cmds.sillydeny
     silly-list:
         description: "List of linked IPs"
         usage: /silly-list
-        permission: justaplugin.sillinesslimiter.sillylist
+        permission: nnhomoli.sillinesslimiter.cmds.sillylist
+    silly-dynamic-limit:
+        description: "Linking dynamic IP to your account"
+        usage: /silly-dynamic-limit
+        permission: nnhomoli.sillinesslimiter.cmds.sillydynamiclimit
+    silly-dynamic-unlimit:
+        description: "Unlinking dynamic IP from your account"
+        usage: /silly-dynamic-unlimit
+        permission: nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit
+    silly-switch:
+        description: "Turning on/off authentication on your account"
+        usage: /silly-switch
+        permission: nnhomoli.sillinesslimiter.cmds.sillyswitch
+    silly-help:
+        description: "SillinessLimiter help"
+        usage: /silly-help
+        permission: nnhomoli.sillinesslimiter.cmds.sillyhelp

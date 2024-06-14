@@ -1,5 +1,6 @@
-package justaplugin.sillinesslimiter;
+package nnhomoli.sillinesslimiter.cmds;
 
+import nnhomoli.sillinesslimiter.IPLock;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,13 +9,13 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class unlimitsilly implements CommandExecutor, TabCompleter {
+public class sillyunlimit implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
-            List<?> ip = IPLock.getPlugin(IPLock.class).getConfig().getList(p.getName());
+            List<?> ip = IPLock.pdata.getList(p.getName());
             if(IPLock.confirmations.containsKey(p) || ip == null) {
                 if(IPLock.confirmations.containsKey(p)) p.sendMessage(IPLock.lang.get("confirm_busy"));
                 else p.sendMessage(IPLock.lang.get("unlimit_fail"));
@@ -51,7 +52,7 @@ public class unlimitsilly implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        List ip = IPLock.getPlugin(IPLock.class).getConfig().getList(sender.getName());
+        List ip = IPLock.pdata.getList(sender.getName());
         if(strings.length == 1 && ip != null) return ip;
         return null;
     }
