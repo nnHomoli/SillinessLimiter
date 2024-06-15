@@ -8,7 +8,7 @@ Useful for offline servers
 
 It was meant to be used somewhere but left unused, so I decided to finish it and make it public.
 
-Also includes customizable language file
+Also includes customizable language file and dynamic IP support
 
 ![kick_example.jpg](kick_example.jpg)
 
