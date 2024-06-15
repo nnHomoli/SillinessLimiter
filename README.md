@@ -45,7 +45,7 @@ permission: nnhomoli.sillinesslimiter.cmds.sillydeny
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyreload
 #### _/silly-switch_
--- Switches the auth status for the user individually, needs confirmation
+-- switches the auth status for the user individually, needs confirmation
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyswitch
 #### _/silly-dynamic-limit_
