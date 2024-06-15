@@ -29,6 +29,7 @@ permission: nnhomoli.sillinesslimiter.cmds.sillyunlimit
 #### _/silly-list_ 
 -- shows the list of linked IPs to your account
 ![](list-example.jpg)
+
 permission: nnhomoli.sillinesslimiter.cmds.sillylist
 #### _/silly-confirm_
 -- just to confirm changes, nothing else
