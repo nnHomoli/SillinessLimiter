@@ -15,7 +15,7 @@ Also includes customizable language file
 ## Commands
 
 #### _/silly-help_
--- displays in-game command-documentation
+-- displays in-game command documentation
 ![help-example.jpg](help-example.jpg)
   
 permission: nnhomoli.sillinesslimiter.cmds.sillyhelp
