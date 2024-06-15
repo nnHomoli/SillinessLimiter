@@ -1,6 +1,7 @@
 package nnhomoli.sillinesslimiter.lang;
 
 import nnhomoli.sillinesslimiter.IPLock;
+
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 

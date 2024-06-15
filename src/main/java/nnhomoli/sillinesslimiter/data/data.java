@@ -1,6 +1,7 @@
 package nnhomoli.sillinesslimiter.data;
 
 import nnhomoli.sillinesslimiter.IPLock;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;

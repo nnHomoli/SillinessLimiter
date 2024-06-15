@@ -1,9 +1,9 @@
 package nnhomoli.sillinesslimiter.data;
 
 import nnhomoli.sillinesslimiter.IPLock;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.io.IOException;
 import java.util.List;
 
 public class converter {

@@ -1,7 +1,7 @@
 package nnhomoli.sillinesslimiter.cmds;
 
 import nnhomoli.sillinesslimiter.IPLock;
-import org.bukkit.ChatColor;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class sillyconfirm implements CommandExecutor {
 
@@ -34,7 +33,6 @@ public class sillyconfirm implements CommandExecutor {
                             if (ip == null) ip = List.of(value);
                             else ip.add(value);
                         }
-
 
                         if (ip.isEmpty()) ip = null;
 
@@ -68,11 +66,9 @@ public class sillyconfirm implements CommandExecutor {
 
                 p.sendMessage(msg);
                 IPLock.log.info(log_msg);
+
                 if (IPLock.getPlugin(IPLock.class).getConfig().getBoolean("check-after-confirm") && IPLock.pdata.isEnabled(p.getName())) {
-                    Object dynamic = IPLock.pdata.get(key);
-                    if (ip != null && !ip.contains(p.getAddress().getAddress().getHostAddress()) ||
-                            dynamic != null && !Pattern.compile(dynamic.toString()).matcher(p.getAddress().getAddress().getHostAddress()).matches())
-                        p.kickPlayer(IPLock.lang.get("kick_reason"));
+                    if(!IPLock.isIPLinked(p.getName(), p.getAddress().getAddress().getHostAddress())) p.kickPlayer(IPLock.lang.get("kick_reason"));
                 }
 
                 IPLock.confirmations.remove(p);

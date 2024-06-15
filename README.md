@@ -2,7 +2,7 @@
 
 ## Description
 
-SillinessLimiter is a little strange iplock with the intention of providing freedom to the player while ensuring his safety and being simple
+SillinessLimiter is a little strange iplock with the intention of providing freedom to the player while ensuring his safety and being simple to use
 
 Useful for offline servers
 

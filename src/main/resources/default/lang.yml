@@ -23,18 +23,17 @@
 ##             %RESET% = Reset
 
 ##silly-help
-help: "\n%GOLD%⏶ ========|%BOLD%%RED%SillinessLimiter Help%RESET%%GOLD%|==============
-%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-help --%RESET%%YELLOW% display this message 
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-list --%RESET%%YELLOW% list all linked IPs
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-switch --%RESET%%YELLOW% switch auth status
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-confirm --%RESET%%YELLOW% confirm the change
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-deny --%RESET%%YELLOW% deny the change
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-reload --%RESET%%YELLOW% reload config and language
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-dynamic-limit --%RESET%%YELLOW% link dynamic IP
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-dynamic-unlimit --%RESET%%YELLOW% unlink dynamic IP
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-limit --%RESET%%YELLOW% link IP
-%RESET%%AQUA%\n||   %BOLD%%DARK_AQUA%/silly-unlimit --%RESET%%YELLOW% unlink IP
-\n%GOLD%⏷ ========|%BOLD%%RED%SillinessLimiter Help%RESET%%GOLD%|==============\n "
+help: "\n%GOLD%⏶ ========|%AQUA%%BOLD%SillinessLimiter Help%RESET%%GOLD%|==============
+%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-help --%YELLOW%%ITALIC% display this message 
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-list --%YELLOW%%ITALIC% list all linked IPs
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-switch --%YELLOW%%ITALIC% switch auth status
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-confirm --%YELLOW%%ITALIC% confirm the change
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-deny --%YELLOW%%ITALIC% deny the change
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-dynamic-limit --%YELLOW%%ITALIC% link dynamic IP
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-dynamic-unlimit --%YELLOW%%ITALIC% unlink dynamic IP
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-limit --%YELLOW%%ITALIC% link IP
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-unlimit --%YELLOW%%ITALIC% unlink IP
+\n%GOLD%⏷ ========|%AQUA%%BOLD%SillinessLimiter Help%RESET%%GOLD%|==============\n "
 
 ##silly-deny
 deny: "%GOLD%%BOLD%Successfully denied the previous change"
@@ -59,8 +58,8 @@ unlimit_this: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%a
 unlimit_that: "%YELLOW%Are you sure you want to unlink this %RED%%BOLD%address%RESET%%YELLOW%\nfrom your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 ##silly-dynamic-limit
-dynamic_already_there: "%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been limited %BOLD%dynamically"
-dynamic_success: "%GOLD%Silliness has been limited %BOLD%dynamically"
+dynamic_already_there: "%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been %BOLD%limited dynamically"
+dynamic_success: "%GOLD%Silliness has been %BOLD%limited dynamically"
 
 invalid_dynamic_ip: "%RED%%BOLD%Invalid dynamic IP address%RESET%%RED%, please use asterisk ( * ) after %BOLD%first/second/third%RESET%%RED% octets"
 
@@ -68,8 +67,8 @@ dynamic_limit_this: "%YELLOW%Are you sure you want to link your current %RED%%BO
 dynamic_limit_that: "%YELLOW%Are you sure you want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto your account as dynamic IP?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 ##silly-dynamic-unlimit
-dynamic_unlimit_not_linked: "%GOLD%No silliness to %BOLD%unlimit%RESET%%GOLD% dynamically"
-dynamic_unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited%RESET%%GOLD%"
+dynamic_unlimit_not_linked: "%GOLD%No silliness to %BOLD%unlimit dynamically"
+dynamic_unlimit_success: "%GOLD%Silliness has been %BOLD%unlimited dynamically"
 
 dynamic_unlimit: "%YELLOW%Are you sure you want to unlink your current %RED%%BOLD%\ndynamic address%RESET%%YELLOW%\nfrom your account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
@@ -87,7 +86,7 @@ header: "%GOLD%⏶ ====================="
 
 ips: "%AQUA%|| %DARK_AQUA%%BOLD% %IP%"
 no_ips: "%RED%|| %DARK_RED%%BOLD% No IPS linked"
-dynamic_ip: "%AQUA%|| %BLUE%%BOLD% !!  %IPD% -- dynamic !!"
+dynamic_ip: "%AQUA%|| %BLUE%%BOLD%%MAGIC% !!  %BLUE%%BOLD%%IPD% -- dynamic %MAGIC%!!"
 no_dynamic_ip: "%RED%|| %DARK_RED%%BOLD% no dynamic IPS linked"
 
 bottom: "%GOLD%\n⏷ ======|%AUTHSTATUS%%RESET%%GOLD%|======"
