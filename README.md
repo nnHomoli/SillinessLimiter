@@ -10,6 +10,8 @@ It was meant to be used somewhere but left unused, so I decided to finish it and
 
 Also includes customizable language file and dynamic IP support
 
+Currently tested on 1.20-1.21 
+
 ![kick_example.jpg](kick_example.jpg)
 
 ## Commands
