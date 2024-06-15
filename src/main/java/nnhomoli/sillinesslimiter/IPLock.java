@@ -95,13 +95,12 @@ public final class IPLock extends JavaPlugin {
     public static boolean isIPLinked(String PlayerName, String IP) {
         Object dynamic = IPLock.pdata.get(PlayerName + ";dynamic");
         List<Object> ip = IPLock.pdata.getList(PlayerName);
-        int checked = 0;
-        if(ip != null || dynamic != null) {
-            if (ip != null && ip.contains(IP))
-                checked++;
-            if (dynamic != null && Pattern.compile(dynamic.toString()).matcher(IP).matches())
-                checked++;
-            return checked >= 1;
+        if(dynamic != null) {
+            Pattern p = Pattern.compile(dynamic.toString());
+            return p.matcher(IP).matches();
+        }
+        if(ip != null) {
+            return ip.contains(IP);
         }
         return true;
     }
