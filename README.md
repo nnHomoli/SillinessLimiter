@@ -17,6 +17,7 @@ Also includes customizable language file
 #### _/silly-help_
 -- displays in-game command-documentation
 ![help-example.jpg](help-example.jpg)
+  
 permission: nnhomoli.sillinesslimiter.cmds.sillyhelp
 #### _/silly-limit_ 
 -- links your account to IP address you are currently on, needs confirmation. Can be used with an argument to link a specific IP
