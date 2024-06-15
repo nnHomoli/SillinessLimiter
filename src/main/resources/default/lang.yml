@@ -25,14 +25,14 @@
 ##silly-help
 help: "\n%GOLD%⏶ ========|%AQUA%%BOLD%SillinessLimiter Help%RESET%%GOLD%|==============
 %AQUA%\n||   %DARK_AQUA%%BOLD%/silly-help --%YELLOW%%ITALIC% display this message 
-%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-list --%YELLOW%%ITALIC% list all linked IPs
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-list --%YELLOW%%ITALIC% list all linked IPs %RED%(Could show IPs)
 %RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-switch --%YELLOW%%ITALIC% switch auth status
 %RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-confirm --%YELLOW%%ITALIC% confirm the change
 %RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-deny --%YELLOW%%ITALIC% deny the change
 %RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-dynamic-limit --%YELLOW%%ITALIC% link dynamic IP
 %RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-dynamic-unlimit --%YELLOW%%ITALIC% unlink dynamic IP
-%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-limit --%YELLOW%%ITALIC% link IP
-%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-unlimit --%YELLOW%%ITALIC% unlink IP
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-limit --%YELLOW%%ITALIC% link IP %RED%(Could show IPs)
+%RESET%%AQUA%\n||   %DARK_AQUA%%BOLD%/silly-unlimit --%YELLOW%%ITALIC% unlink IP %RED%(Could show IPs)
 \n%GOLD%⏷ ========|%AQUA%%BOLD%SillinessLimiter Help%RESET%%GOLD%|==============\n "
 
 ##silly-deny

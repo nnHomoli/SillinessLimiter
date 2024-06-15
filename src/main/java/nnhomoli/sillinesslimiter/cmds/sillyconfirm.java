@@ -44,11 +44,12 @@ public class sillyconfirm implements CommandExecutor {
                     } else {
                         key = p.getName() + ";dynamic";
                         out = value;
-                        if(IPLock.pdata.get(key) != null) out = null;
 
+                        Object check = IPLock.pdata.get(key);
+                        if(check != null) out = null;
 
-                        msg = IPLock.lang.get("dynamic_success");
-                        log_msg = p.getName() + " has linked dynamic ip";
+                        msg = check != null ? IPLock.lang.get("dynamic_unlimit_success") : IPLock.lang.get("dynamic_success") ;
+                        log_msg = check != null ? p.getName() + " has unlinked dynamic ip" : p.getName() + " has linked dynamic ip";
                     }
 
                 }
