@@ -16,7 +16,8 @@ import java.util.Arrays;
 import static nnhomoli.sillinesslimiter.IPLock.lang;
 
 public class Listener implements org.bukkit.event.Listener {
-    ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("nnhomoli.sillinesslimiter.cmds.sillyunlimit"),
+    private final IPLock plugin;
+    private final ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("nnhomoli.sillinesslimiter.cmds.sillyunlimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillylimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillyconfirm"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillydeny"),
@@ -26,31 +27,34 @@ public class Listener implements org.bukkit.event.Listener {
             new Permission("nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillyhelp")));
 
+    public Listener(IPLock plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
-    public void onLogin(PlayerJoinEvent event) {
+    private void onLogin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
         if(IPLock.getPlugin(IPLock.class).getConfig().getBoolean("Permission-by-default")) {
             PermissionAttachment at = p.addAttachment(IPLock.getPlugin(IPLock.class));
-            perms.forEach(per -> {
+            this.perms.forEach(per -> {
                 at.setPermission(per, true);
             });
             p.updateCommands();
         }
-        if(IPLock.getPlugin(IPLock.class).getConfig().getBoolean("Login-link-message")) {
+        if(this.plugin.getConfig().getBoolean("Login-link-message")) {
             if(IPLock.pdata.getList(p.getName()) == null && IPLock.pdata.get(p.getName() + ";dynamic") == null ||
                     !IPLock.pdata.isEnabled(p.getName())) p.sendMessage(lang.get("login_link_message"));
         }
     }
 
     @EventHandler
-    public void preLogin(AsyncPlayerPreLoginEvent event) {
+    private void preLogin(AsyncPlayerPreLoginEvent event) {
         String p = event.getName();
 
-        converter.convert(p, IPLock.getPlugin(IPLock.class));
+        converter.convert(p, this.plugin);
 
         if(IPLock.pdata.isEnabled(p)) {
-            if (!IPLock.isIPLinked(p, event.getAddress().getHostAddress())) {
+            if (IPLock.checkIP(p, event.getAddress().getHostAddress())) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, lang.get("kick_reason"));
             }
         }

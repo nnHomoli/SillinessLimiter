@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 
 public class LangLoader {
-    HashMap<String, ChatColor> Color = new HashMap<>() {{
+    private final HashMap<String, ChatColor> Color = new HashMap<>() {{
         put("%BLACK%", ChatColor.BLACK);
         put("%DARK_BLUE%", ChatColor.DARK_BLUE);
         put("%DARK_GREEN%", ChatColor.DARK_GREEN);
@@ -35,7 +35,7 @@ public class LangLoader {
         put("%UNDERLINE%", ChatColor.UNDERLINE);
         put("%RESET%", ChatColor.RESET);
     }};
-    HashMap<String,String> map = new HashMap<>();
+    private final HashMap<String,String> map = new HashMap<>();
 
     public void load(IPLock plugin) {
         File f = new File(plugin.getDataFolder() + "/lang.yml");
@@ -44,7 +44,7 @@ public class LangLoader {
                 InputStream in = plugin.getResource("default/lang.yml");
                 Files.copy(in, f.toPath());
             } catch (Exception e) {
-                e.printStackTrace();
+                IPLock.log.info("Failed to copy default language file: " + e);
             }
         }
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(f);

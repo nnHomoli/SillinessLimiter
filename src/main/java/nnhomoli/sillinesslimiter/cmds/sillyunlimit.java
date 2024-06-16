@@ -9,22 +9,28 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class sillyunlimit implements CommandExecutor, TabCompleter {
+    private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             List<?> ip = IPLock.pdata.getList(p.getName());
-            if(IPLock.confirmations.containsKey(p) || ip == null) {
-                if(IPLock.confirmations.containsKey(p)) p.sendMessage(IPLock.lang.get("confirm_busy"));
+            if(sillyconfirm.confirmations.containsKey(p) || ip == null) {
+                if(sillyconfirm.confirmations.containsKey(p)) p.sendMessage(IPLock.lang.get("confirm_busy"));
                 else p.sendMessage(IPLock.lang.get("unlimit_fail"));
                 return true;
             }
 
             if(args.length == 1) {
-                if(!IPLock.ip_pattern.matcher(args[0]).matches()) {
+                if(!this.ip_pattern.matcher(args[0]).matches()) {
                     p.sendMessage(IPLock.lang.get("invalid_ip"));
                     return true;
                 }
@@ -33,7 +39,7 @@ public class sillyunlimit implements CommandExecutor, TabCompleter {
                     return true;
                 }
 
-                IPLock.confirmations.put(p, args[0]);
+                sillyconfirm.confirmations.put(p, args[0]);
                 p.sendMessage(IPLock.lang.get("unlimit_that"));
 
 
@@ -44,7 +50,7 @@ public class sillyunlimit implements CommandExecutor, TabCompleter {
                     return true;
                 }
 
-                IPLock.confirmations.put(p, null);
+                sillyconfirm.confirmations.put(p, null);
                 p.sendMessage(IPLock.lang.get("unlimit_this"));
             }
         }
@@ -53,8 +59,8 @@ public class sillyunlimit implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        List ip = IPLock.pdata.getList(sender.getName());
-        if(strings.length == 1 && ip != null) return ip;
+        List<?> ip = IPLock.pdata.getList(sender.getName());
+        if(strings.length == 1 && ip != null) return (List<String>) ip;
         return null;
     }
 }

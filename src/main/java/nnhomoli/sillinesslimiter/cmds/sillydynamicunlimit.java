@@ -12,7 +12,7 @@ public class sillydynamicunlimit implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if(sender instanceof Player){
             Player p = (Player) sender;
-            if(IPLock.confirmations.containsKey(p)) {
+            if(sillyconfirm.confirmations.containsKey(p)) {
                 p.sendMessage(IPLock.lang.get("confirm_busy"));
                 return true;
             }
@@ -20,8 +20,9 @@ public class sillydynamicunlimit implements CommandExecutor {
             Object dyn = IPLock.pdata.get(p.getName() + ";dynamic");
             if(dyn == null) {
                 p.sendMessage(IPLock.lang.get("dynamic_unlimit_not_linked"));
+
             } else {
-                IPLock.confirmations.put(p, dyn);
+                sillyconfirm.confirmations.put(p, dyn);
                 p.sendMessage(IPLock.lang.get("dynamic_unlimit"));
             }
         }

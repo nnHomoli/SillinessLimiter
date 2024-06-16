@@ -14,7 +14,7 @@ public class sillylist implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if(sender instanceof Player) {
             Player p = (Player) sender;
-            List ip = IPLock.pdata.getList(p.getName());
+            List<Object> ip = IPLock.pdata.getList(p.getName());
             String authstatus = IPLock.pdata.isEnabled(p.getName()) ? IPLock.lang.get("auth_on") : IPLock.lang.get("auth_off");
             Object dynamic = IPLock.pdata.get(p.getName() + ";dynamic");
 

@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class data {
-    HashMap<String, Object> data = new HashMap<>();
-    YamlConfiguration yaml;
+    private final HashMap<String, Object> data = new HashMap<>();
+    private YamlConfiguration yaml;
 
     public void load(IPLock plugin) {
         File f = new File(plugin.getDataFolder() + "/data.yml");
@@ -37,8 +37,8 @@ public class data {
     public List<Object> getList(String key) {
         Object out = data.get(key);
         if(out instanceof List) {
-            return new ArrayList<>((List<Object>) out);
-        };
+            return new ArrayList<>((List<?>) out);
+        }
         return null;
     }
     public Boolean getBoolean(String key) {

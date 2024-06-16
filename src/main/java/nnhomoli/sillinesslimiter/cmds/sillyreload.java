@@ -8,10 +8,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class sillyreload implements CommandExecutor {
+    private final  IPLock plugin;
+
+    public sillyreload(IPLock plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        IPLock.getPlugin(IPLock.class).reloadConfig();
+        this.plugin.reloadConfig();
         IPLock.pdata.reload();
         IPLock.lang.reload();
 

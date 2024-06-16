@@ -1,8 +1,8 @@
 ##             ---Color Formatting Guide---                                   --Variable Guide--
 ##             %GREEN% = Green                                   the only variable you can use is in /silly-list
-##             %MAGIC% = Magic                                               %IP% = IP, onlu in ips
+##             %MAGIC% = Magic                                               %IP% = IP, only in ips
 ##             %AQUA% = Aqua                                %AUTHSTATUS% = Auth status, returns auth_on or auth_off, only header/bottom
-##             %BOLD% = Bold                                          %IPD% = Dynamic IP, onlu in dynamic_ip
+##             %BOLD% = Bold                                          %IPD% = Dynamic IP, only in dynamic_ip
 ##             %ITALIC% = Italic
 ##             %STRIKETHROUGH% = Strikethrough
 ##             %UNDERLINE% = Underline

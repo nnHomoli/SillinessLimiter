@@ -12,17 +12,17 @@ public class sillyswitch implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if(sender instanceof Player) {
             Player p = (Player) sender;
-            if (IPLock.confirmations.containsKey(p)) {
+            if (sillyconfirm.confirmations.containsKey(p)) {
                 p.sendMessage(IPLock.lang.get("confirm_busy"));
                 return true;
             }
 
             boolean out;
             if(IPLock.pdata.isEnabled(p.getName())) {
-                IPLock.confirmations.put(p, false);
+                sillyconfirm.confirmations.put(p, false);
                 out = false;
             } else {
-                IPLock.confirmations.put(p, true);
+                sillyconfirm.confirmations.put(p, true);
                 out = true;
             }
             p.sendMessage(IPLock.lang.get(out ? "switch_to_true" : "switch_to_false"));

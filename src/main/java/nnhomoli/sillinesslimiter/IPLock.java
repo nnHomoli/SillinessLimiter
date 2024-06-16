@@ -5,8 +5,6 @@ import nnhomoli.sillinesslimiter.cmds.*;
 import nnhomoli.sillinesslimiter.misc.Listener;
 import nnhomoli.sillinesslimiter.lang.LangLoader;
 
-import org.bukkit.entity.Player;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -17,33 +15,24 @@ public final class IPLock extends JavaPlugin {
     public static Logger log;
     public static data pdata;
     public static LangLoader lang;
-    public static HashMap<Player, Object> confirmations = new HashMap<>();
-    public static ArrayList<Pattern> dynamic_ranges = new ArrayList<>(Arrays.asList(
-                    Pattern.compile("(\\d{1,3}\\.)\\*"),
-                    Pattern.compile("(\\d{1,3}\\.\\d{1,3}\\.)\\*"),
-                    Pattern.compile("(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.)\\*")));
-    public static Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        this.getCommand("silly-limit").setExecutor(new sillylimit());
+        this.getCommand("silly-limit").setExecutor(new sillylimit(this));
         this.getCommand("silly-unlimit").setExecutor(new sillyunlimit());
-        this.getCommand("silly-confirm").setExecutor(new sillyconfirm());
+        this.getCommand("silly-confirm").setExecutor(new sillyconfirm(this));
         this.getCommand("silly-deny").setExecutor(new sillydeny());
         this.getCommand("silly-switch").setExecutor(new sillyswitch());
-        this.getCommand("silly-reload").setExecutor(new sillyreload());
+        this.getCommand("silly-reload").setExecutor(new sillyreload(this));
         this.getCommand("silly-list").setExecutor(new sillylist());
         this.getCommand("silly-dynamic-limit").setExecutor(new sillydynamiclimit());
         this.getCommand("silly-dynamic-unlimit").setExecutor(new sillydynamicunlimit());
         this.getCommand("silly-help").setExecutor(new sillyhelp());
 
 
-        getServer().getPluginManager().registerEvents(new Listener(), this);
+        getServer().getPluginManager().registerEvents(new Listener(this), this);
     }
 
     @Override
@@ -92,16 +81,16 @@ public final class IPLock extends JavaPlugin {
         pdata.save();
     }
 
-    public static boolean isIPLinked(String PlayerName, String IP) {
+    public static boolean checkIP(String PlayerName, String IP) {
         Object dynamic = IPLock.pdata.get(PlayerName + ";dynamic");
         List<Object> ip = IPLock.pdata.getList(PlayerName);
         if(dynamic != null) {
             Pattern p = Pattern.compile(dynamic.toString());
-            return p.matcher(IP).matches();
+            return !p.matcher(IP).matches();
         }
         if(ip != null) {
-            return ip.contains(IP);
+            return !ip.contains(IP);
         }
-        return true;
+        return false;
     }
 }
