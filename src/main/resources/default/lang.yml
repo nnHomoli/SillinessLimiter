@@ -1,16 +1,8 @@
 ##             ---Color Formatting Guide---                                   --Variable Guide--
-##             %GREEN% = Green                                   the only variable you can use is in /silly-list
-##             %MAGIC% = Magic                                               %IP% = IP, onlu in ips
-##             %AQUA% = Aqua                                %AUTHSTATUS% = Auth status, returns auth_on or auth_off, only header/bottom
-##             %BOLD% = Bold                                          %IPD% = Dynamic IP, onlu in dynamic_ip
-##             %ITALIC% = Italic
-##             %STRIKETHROUGH% = Strikethrough
-##             %UNDERLINE% = Underline
-##             %LIGHT_PURPLE% = Light Purple
-##             %BLACK% = Black
-##             %DARK_BLUE% = Dark Blue
-##             %DARK_GREEN% = Dark Green
-##             %DARK_AQUA% = Dark Aqua
+##             %BLACK% = Black                                   the only variable you can use is in /silly-list
+##             %DARK_BLUE% = Dark Blue                                      %IP% = IP, onlu in ips
+##             %DARK_GREEN% = Dark Green                   %AUTHSTATUS% = Auth status, returns auth_on or auth_off, only header/bottom
+##             %DARK_AQUA% = Dark Aqua                                %IPD% = Dynamic IP, onlu in dynamic_ip
 ##             %DARK_RED% = Dark Red
 ##             %DARK_PURPLE% = Dark Purple
 ##             %GOLD% = Gold
@@ -20,7 +12,15 @@
 ##             %GREEN% = Green
 ##             %AQUA% = Aqua
 ##             %RED% = Red
+##             %LIGHT_PURPLE% = Light Purple
+##             %YELLOW% = Yellow
+##             %WHITE% = White
+##             %MAGIC% = Magic
 ##             %RESET% = Reset
+##             %BOLD% = Bold
+##             %ITALIC% = Italic
+##             %STRIKETHROUGH% = Strikethrough
+##             %UNDERLINE% = Underline
 
 ##silly-help
 help: "\n%GOLD%⏶ ========|%AQUA%%BOLD%SillinessLimiter Help%RESET%%GOLD%|==============
