@@ -41,11 +41,6 @@ public class data {
         }
         return null;
     }
-    public Boolean getBoolean(String key) {
-        Object out = data.get(key);
-        if(out instanceof Boolean) return (Boolean) out;
-        return null;
-    }
 
     public Boolean isEnabled(String key) {
         Object out = data.get(key + ";enabled");

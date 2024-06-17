@@ -34,7 +34,7 @@ public class Listener implements org.bukkit.event.Listener {
     @EventHandler
     private void onLogin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-        if(IPLock.getPlugin(IPLock.class).getConfig().getBoolean("Permission-by-default")) {
+        if(this.plugin.getConfig().getBoolean("Permission-by-default")) {
             PermissionAttachment at = p.addAttachment(IPLock.getPlugin(IPLock.class));
             this.perms.forEach(per -> {
                 at.setPermission(per, true);

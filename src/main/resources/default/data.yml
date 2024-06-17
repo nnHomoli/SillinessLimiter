@@ -7,6 +7,5 @@ Steve;enabled: true
 Steve:
   - 127.0.0.1
 ##dynamic ip
-Steve;dynamic:
-  - 127.0.0.*
+Steve;dynamic: 127.0.*
 
