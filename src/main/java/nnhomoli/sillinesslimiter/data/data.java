@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.data;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,14 +16,14 @@ public class data {
     private final HashMap<String, Object> data = new HashMap<>();
     private YamlConfiguration yaml;
 
-    public void load(IPLock plugin) {
+    public void load(SillinessLimiter plugin) {
         File f = new File(plugin.getDataFolder() + "/data.yml");
         if(!f.exists()) {
             try {
                 InputStream in = plugin.getResource("default/data.yml");
                 Files.copy(in, f.toPath());
             } catch (Exception e) {
-                IPLock.log.info("Failed to create data.yml " + e.getMessage());
+                SillinessLimiter.log.info("Failed to copy default data.yml:\n" + e.getMessage());
             }
         }
         yaml = YamlConfiguration.loadConfiguration(f);
@@ -31,7 +31,7 @@ public class data {
             data.put(key,yaml.get(key));
         }
     }
-    public Object get(String key) {
+    private Object get(String key) {
         return data.get(key);
     }
     public List<Object> getList(String key) {
@@ -42,8 +42,14 @@ public class data {
         return null;
     }
 
-    public Boolean isEnabled(String key) {
-        Object out = data.get(key + ";enabled");
+    public String getDynamicIP(String PlayerName) {
+        Object out = data.get(PlayerName + ";dynamic");
+        if(out instanceof String) return (String) out;
+        return null;
+    }
+
+    public Boolean isEnabled(String PlayerName) {
+        Object out = data.get(PlayerName + ";enabled");
         if(out instanceof Boolean) return (Boolean) out;
         return null;
     }
@@ -55,14 +61,14 @@ public class data {
     public void save() {
         data.keySet().forEach(key -> yaml.set(key,data.get(key)));
         try {
-            yaml.save(new File(IPLock.getPlugin(IPLock.class).getDataFolder() + "/data.yml"));
+            yaml.save(new File(SillinessLimiter.getPlugin(SillinessLimiter.class).getDataFolder() + "/data.yml"));
         } catch (IOException e) {
-            IPLock.log.info("Failed to save data.yml " + e.getMessage());
+            SillinessLimiter.log.info("Failed to save data.yml " + e.getMessage());
         }
     }
 
     public void reload() {
         data.clear();
-        load(IPLock.getPlugin(IPLock.class));
+        load(SillinessLimiter.getPlugin(SillinessLimiter.class));
     }
 }

@@ -1,14 +1,14 @@
 package nnhomoli.sillinesslimiter.data;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
 
 public class converter {
-    public static void convert(String player_name, IPLock plugin){
-        if(IPLock.pdata.get(player_name) == null && IPLock.pdata.isEnabled(player_name) == null) {
+    public static void convert(String player_name, SillinessLimiter plugin){
+        if(SillinessLimiter.udata.getList(player_name) == null && SillinessLimiter.udata.isEnabled(player_name) == null) {
             FileConfiguration cfg = plugin.getConfig();
             String single = cfg.getString(player_name);
             List<?> multiple = cfg.getList(player_name);
@@ -16,16 +16,16 @@ public class converter {
             if(single != null || multiple != null) {
                 if (single != null && multiple == null) multiple = List.of(cfg.getString(player_name));
 
-                IPLock.pdata.set(player_name, multiple);
-                IPLock.pdata.set(player_name + ";enabled", true);
+                SillinessLimiter.udata.set(player_name, multiple);
+                SillinessLimiter.udata.set(player_name + ";enabled", true);
 
                 cfg.set(player_name, null);
                 plugin.saveConfig();
                 plugin.reloadConfig();
 
-                IPLock.log.info("Converted " + player_name + " to 1.2");
-            } else IPLock.pdata.set(player_name + ";enabled", true);
-            IPLock.pdata.save();
+                SillinessLimiter.log.info("Converted " + player_name + " to 1.2");
+            } else SillinessLimiter.udata.set(player_name + ";enabled", true);
+            SillinessLimiter.udata.save();
         }
     }
 }

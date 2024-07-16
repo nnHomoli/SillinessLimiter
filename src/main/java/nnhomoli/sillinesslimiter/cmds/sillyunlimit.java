@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.cmds;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,38 +20,37 @@ public class sillyunlimit implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
-            List<?> ip = IPLock.pdata.getList(p.getName());
+        if (sender instanceof Player p) {
+            List<?> ip = SillinessLimiter.udata.getList(p.getName());
             if(sillyconfirm.confirmations.containsKey(p) || ip == null) {
-                if(sillyconfirm.confirmations.containsKey(p)) p.sendMessage(IPLock.lang.get("confirm_busy"));
-                else p.sendMessage(IPLock.lang.get("unlimit_fail"));
+                if(sillyconfirm.confirmations.containsKey(p)) p.sendMessage(SillinessLimiter.lang.get("confirm_busy"));
+                else p.sendMessage(SillinessLimiter.lang.get("unlimit_fail"));
                 return true;
             }
 
             if(args.length == 1) {
                 if(!this.ip_pattern.matcher(args[0]).matches()) {
-                    p.sendMessage(IPLock.lang.get("invalid_ip"));
+                    p.sendMessage(SillinessLimiter.lang.get("invalid_ip"));
                     return true;
                 }
                 if (!ip.contains(args[0])) {
-                    sender.sendMessage(IPLock.lang.get("unlimit_fail"));
+                    sender.sendMessage(SillinessLimiter.lang.get("unlimit_fail"));
                     return true;
                 }
 
                 sillyconfirm.confirmations.put(p, args[0]);
-                p.sendMessage(IPLock.lang.get("unlimit_that"));
+                p.sendMessage(SillinessLimiter.lang.get("unlimit_that"));
 
 
             } else {
 
                 if(!ip.contains(p.getAddress().getAddress().getHostAddress())) {
-                    p.sendMessage(IPLock.lang.get("unlimit_fail"));
+                    p.sendMessage(SillinessLimiter.lang.get("unlimit_fail"));
                     return true;
                 }
 
                 sillyconfirm.confirmations.put(p, null);
-                p.sendMessage(IPLock.lang.get("unlimit_this"));
+                p.sendMessage(SillinessLimiter.lang.get("unlimit_this"));
             }
         }
         return true;
@@ -59,7 +58,7 @@ public class sillyunlimit implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        List<?> ip = IPLock.pdata.getList(sender.getName());
+        List<?> ip = SillinessLimiter.udata.getList(sender.getName());
         if(strings.length == 1 && ip != null) return (List<String>) ip;
         return null;
     }

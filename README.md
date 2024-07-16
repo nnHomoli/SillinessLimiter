@@ -2,22 +2,19 @@
 
 ## Description
 
-SillinessLimiter is a little strange iplock with the intention of providing freedom to the player while ensuring his safety and being simple to use
-
-Useful for offline servers
-
-It was meant to be used somewhere but left unused, so I decided to finish it and make it public.
+SillinessLimiter is a little strange ip based auth with the intention of providing an easy choice to the player
+of how they want to secure their account on an offline server while also not being annoying
 
 Also includes customizable language file and dynamic IP support
 
-Currently tested on 1.20-1.21 
+Tested on 1.20-1.21 
 
-![kick_example.jpg](kick_example.jpg)
+![kick-example.jpg](kick-example.jpg)
 
 ## Commands
 
 #### _/silly-help_
--- displays in-game command documentation
+-- displays in-game command documentation, only including basic ones 
 ![help-example.jpg](help-example.jpg)
   
 permission: nnhomoli.sillinesslimiter.cmds.sillyhelp
@@ -58,7 +55,8 @@ permission: nnhomoli.sillinesslimiter.cmds.sillydynamiclimit
 -- unlinks the dynamic ip from your account, needs confirmation 
 
 permission: nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit
-## Config
+___
+## **Config**
 
 #### _Permission-by-default_ ## true/false
 -- grants every permission of this plugin commands, except reload, true by default
@@ -77,3 +75,14 @@ permission: nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit
 
 ## Player data
 -- For more info about this one, check [data.yml](src%2Fmain%2Fresources%2Fdefault%2Fdata.yml)
+
+___
+# **Official pages**
+
+-- **modrinth:** 
+
+https://modrinth.com/plugin/sillinesslimiter
+
+-- **planetminecraft**: 
+
+https://www.planetminecraft.com/mod/sillinesslimiter-a-little-strange-ip-based-auth-bukkit-1-20-4-120-6/

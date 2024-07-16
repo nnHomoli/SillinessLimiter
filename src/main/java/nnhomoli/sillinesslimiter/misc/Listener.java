@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.misc;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 import nnhomoli.sillinesslimiter.data.converter;
 
 import org.bukkit.entity.Player;
@@ -13,10 +13,10 @@ import org.bukkit.permissions.PermissionAttachment;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static nnhomoli.sillinesslimiter.IPLock.lang;
+import static nnhomoli.sillinesslimiter.SillinessLimiter.lang;
 
 public class Listener implements org.bukkit.event.Listener {
-    private final IPLock plugin;
+    private final SillinessLimiter plugin;
     private final ArrayList<Permission> perms = new ArrayList<>(Arrays.asList(new Permission("nnhomoli.sillinesslimiter.cmds.sillyunlimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillylimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillyconfirm"),
@@ -27,7 +27,7 @@ public class Listener implements org.bukkit.event.Listener {
             new Permission("nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit"),
             new Permission("nnhomoli.sillinesslimiter.cmds.sillyhelp")));
 
-    public Listener(IPLock plugin) {
+    public Listener(SillinessLimiter plugin) {
         this.plugin = plugin;
     }
 
@@ -35,15 +35,15 @@ public class Listener implements org.bukkit.event.Listener {
     private void onLogin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
         if(this.plugin.getConfig().getBoolean("Permission-by-default")) {
-            PermissionAttachment at = p.addAttachment(IPLock.getPlugin(IPLock.class));
+            PermissionAttachment at = p.addAttachment(SillinessLimiter.getPlugin(SillinessLimiter.class));
             this.perms.forEach(per -> {
                 at.setPermission(per, true);
             });
             p.updateCommands();
         }
         if(this.plugin.getConfig().getBoolean("Login-link-message")) {
-            if(IPLock.pdata.getList(p.getName()) == null && IPLock.pdata.get(p.getName() + ";dynamic") == null ||
-                    !IPLock.pdata.isEnabled(p.getName())) p.sendMessage(lang.get("login_link_message"));
+            if(SillinessLimiter.udata.getList(p.getName()) == null && SillinessLimiter.udata.getDynamicIP(p.getName()) == null ||
+                    !SillinessLimiter.udata.isEnabled(p.getName())) p.sendMessage(lang.get("login_link_message"));
         }
     }
 
@@ -53,8 +53,8 @@ public class Listener implements org.bukkit.event.Listener {
 
         converter.convert(p, this.plugin);
 
-        if(IPLock.pdata.isEnabled(p)) {
-            if (IPLock.checkIP(p, event.getAddress().getHostAddress())) {
+        if(SillinessLimiter.udata.isEnabled(p)) {
+            if (SillinessLimiter.IPNotLinked(p, event.getAddress().getHostAddress())) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, lang.get("kick_reason"));
             }
         }

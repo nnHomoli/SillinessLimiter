@@ -7,19 +7,31 @@ import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.FileInputStream;
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 
-public final class IPLock extends JavaPlugin {
+public final class SillinessLimiter extends JavaPlugin {
     public static Logger log;
-    public static data pdata;
+    public static data udata;
     public static LangLoader lang;
 
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        try {
+            Properties props = new Properties();
+            props.load(new FileInputStream("server.properties"));
+            if(props.getProperty("online-mode").equals("true")) {
+                log.info("Online mode detected, automatically disabling " + this.getName());
+                this.getServer().getPluginManager().disablePlugin(this);
+                return;
+            }
+        } catch(Exception e) {
+            log.info("Failed to check online mode:\n" + e.getMessage());
+        }
+
         this.getCommand("silly-limit").setExecutor(new sillylimit(this));
         this.getCommand("silly-unlimit").setExecutor(new sillyunlimit());
         this.getCommand("silly-confirm").setExecutor(new sillyconfirm(this));
@@ -40,11 +52,10 @@ public final class IPLock extends JavaPlugin {
         // Plugin load logic
         log = this.getLogger();
 
-        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2")) {
-            this.getConfig().set("version", "1.2");
+        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2.2")) {
+            this.getConfig().set("version", "1.2.2");
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
-
         if(this.getConfig().get("Permission-by-default") == null) {
             this.getConfig().set("Permission-by-default", true);
             this.getConfig().setComments("Permission-by-default", List.of("Grants every permission of this plugin commands, except reload. True by default"));
@@ -68,29 +79,32 @@ public final class IPLock extends JavaPlugin {
         lang = new LangLoader();
         lang.load(this);
 
-        pdata = new data();
-        pdata.load(this);
+        udata = new data();
+        udata.load(this);
 
-        log.info("Silliness limiter Has been loaded");
+        log.info(this.getName() + " Has been loaded");
 
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        pdata.save();
+        udata.save();
+
+        log.info(this.getName() + " Has been unloaded");
     }
 
-    public static boolean checkIP(String PlayerName, String IP) {
-        Object dynamic = IPLock.pdata.get(PlayerName + ";dynamic");
-        List<Object> ip = IPLock.pdata.getList(PlayerName);
+    public static boolean IPNotLinked(String PlayerName, String IP) {
+        String dynamic = SillinessLimiter.udata.getDynamicIP(PlayerName);
+        List<Object> ip = SillinessLimiter.udata.getList(PlayerName);
+
+        boolean allow = false;
         if(dynamic != null) {
-            Pattern p = Pattern.compile(dynamic.toString());
-            return !p.matcher(IP).matches();
+            if(IP.contains(dynamic.replace("*", ""))) allow = true;
         }
         if(ip != null) {
-            return !ip.contains(IP);
+            if(ip.contains(IP)) allow = true;
         }
-        return false;
+        return !allow;
     }
 }

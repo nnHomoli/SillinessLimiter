@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.cmds;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,28 +12,27 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class sillylimit implements CommandExecutor, TabCompleter {
-    private final IPLock plugin;
+    private final SillinessLimiter plugin;
     private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
-    public sillylimit(IPLock plugin) {
+    public sillylimit(SillinessLimiter plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
-            List<?> ip = IPLock.pdata.getList(p.getName());
+        if (sender instanceof Player p) {
+            List<?> ip = SillinessLimiter.udata.getList(p.getName());
             if (sillyconfirm.confirmations.containsKey(p)) {
-                p.sendMessage(IPLock.lang.get("confirm_busy"));
+                p.sendMessage(SillinessLimiter.lang.get("confirm_busy"));
                 return true;
             }
 
             if(ip != null && ip.size() >= this.plugin.getConfig().getInt("Max-IP-Allowed")) {
-                p.sendMessage(IPLock.lang.get("maximum_reached"));
+                p.sendMessage(SillinessLimiter.lang.get("maximum_reached"));
                 return true;
             }
             String out = "";
@@ -41,21 +40,21 @@ public class sillylimit implements CommandExecutor, TabCompleter {
 
             if (args.length == 1) {
                 if (!this.ip_pattern.matcher(args[0]).matches()) {
-                    p.sendMessage(IPLock.lang.get("invalid_ip"));
+                    p.sendMessage(SillinessLimiter.lang.get("invalid_ip"));
                     return true;
                 }
 
                 out = args[0];
-                msg = IPLock.lang.get("limit_that");
+                msg = SillinessLimiter.lang.get("limit_that");
 
             } else {
 
                 out = p.getAddress().getAddress().getHostAddress();
-                msg = IPLock.lang.get("limit_this");
+                msg = SillinessLimiter.lang.get("limit_this");
             }
 
             if (ip != null && ip.contains(out)) {
-                p.sendMessage(IPLock.lang.get("limit_already_there"));
+                p.sendMessage(SillinessLimiter.lang.get("limit_already_there"));
                 return true;
             }
 
@@ -67,7 +66,7 @@ public class sillylimit implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] strings) {
-        List<?> ip = IPLock.pdata.getList(sender.getName());
+        List<?> ip = SillinessLimiter.udata.getList(sender.getName());
         if(strings.length == 1 && ip != null) return (List<String>) ip;
         return null;
     }

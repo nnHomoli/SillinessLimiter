@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.lang;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,14 +37,14 @@ public class LangLoader {
     }};
     private final HashMap<String,String> map = new HashMap<>();
 
-    public void load(IPLock plugin) {
+    public void load(SillinessLimiter plugin) {
         File f = new File(plugin.getDataFolder() + "/lang.yml");
         if(!f.exists()) {
             try {
                 InputStream in = plugin.getResource("default/lang.yml");
                 Files.copy(in, f.toPath());
             } catch (Exception e) {
-                IPLock.log.info("Failed to copy default language file: " + e);
+                SillinessLimiter.log.info("Failed to copy default language file:\n" + e);
             }
         }
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(f);
@@ -62,6 +62,6 @@ public class LangLoader {
 
     public void reload() {
         map.clear();
-        load(IPLock.getPlugin(IPLock.class));
+        load(SillinessLimiter.getPlugin(SillinessLimiter.class));
     }
 }

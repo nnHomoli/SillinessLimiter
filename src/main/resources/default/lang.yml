@@ -1,8 +1,8 @@
 ##             ---Color Formatting Guide---                                   --Variable Guide--
 ##             %BLACK% = Black                                   the only variable you can use is in /silly-list
-##             %DARK_BLUE% = Dark Blue                                      %IP% = IP, onlu in ips
+##             %DARK_BLUE% = Dark Blue                                      %IP% = IP, only in ips
 ##             %DARK_GREEN% = Dark Green                   %AUTHSTATUS% = Auth status, returns auth_on or auth_off, only header/bottom
-##             %DARK_AQUA% = Dark Aqua                                %IPD% = Dynamic IP, onlu in dynamic_ip
+##             %DARK_AQUA% = Dark Aqua                                %IPD% = Dynamic IP, only in dynamic_ip
 ##             %DARK_RED% = Dark Red
 ##             %DARK_PURPLE% = Dark Purple
 ##             %GOLD% = Gold
@@ -61,7 +61,7 @@ unlimit_that: "%YELLOW%Are u sure u want to unlink this %RED%%BOLD%address%RESET
 dynamic_already_there: "%RED%No i don't think so,\n%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been dynamically %BOLD%limited%RESET%%GOLD% there"
 dynamic_success: "%LIGHT_PURPLE%yaaaay, %GOLD%silliness has been %BOLD%limited%RESET%%GOLD% dynamically"
 
-invalid_dynamic_ip: "%RED%%BOLD%Invalid dynamic IP address %DARK_RED%>:(%RESET%%RED%, please use asterisk ( * ) after %BOLD%first/second/third%RESET%%RED% octets"
+invalid_dynamic_ip: "%RED%%BOLD%Invalid dynamic IP address %DARK_RED%>:(%RESET%%RED%\nplease use asterisk ( * ) after %BOLD%first/second/third%RESET%%RED% octets"
 
 dynamic_limit_this: "%YELLOW%Are u sure u want to link ur current %RED%%BOLD%address%RESET%%YELLOW%\nto ur account as dynamic IP?%DARK_RED%\nBy using this option, it will be defaulted\nto the second octet of ur current one%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 dynamic_limit_that: "%YELLOW%Are u sure u want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto ur account as dynamic IP?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
@@ -93,7 +93,7 @@ bottom: "%GOLD%\n⏷ ======|%AUTHSTATUS%%RESET%%GOLD%|======"
 
 ##misc
 kick_reason:  "%RED%%BOLD%Trying to limit ur silliness\n\n%AQUA% U joined the account with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
-login_link_message: "%RED%Ur IP is not linked, ur progress might be at risk, use %BOLD%/silly-limit%RESET%%RED% to protect ur account"
+login_link_message: "%RED%Ur IP is not linked, ur progress might be at risk, use %BOLD%/silly-help%RESET%%RED% for more info on how to secure ur account"
 
 plugin_reload: "%GOLD%%BOLD%Reloaded the silly"
 

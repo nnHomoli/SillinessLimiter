@@ -1,6 +1,6 @@
 package nnhomoli.sillinesslimiter.cmds;
 
-import nnhomoli.sillinesslimiter.IPLock;
+import nnhomoli.sillinesslimiter.SillinessLimiter;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class sillyconfirm implements CommandExecutor {
-    private final IPLock plugin;
+    private final SillinessLimiter plugin;
     private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -21,27 +21,30 @@ public class sillyconfirm implements CommandExecutor {
 
     public static final HashMap<Player, Object> confirmations = new HashMap<>();
 
-    public sillyconfirm(IPLock plugin) {
+    public sillyconfirm(SillinessLimiter plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
-            List<Object> ip = IPLock.pdata.getList(p.getName());
+        if (sender instanceof Player p) {
+            List<Object> ip = SillinessLimiter.udata.getList(p.getName());
             if (!confirmations.containsKey(p)) {
-                sender.sendMessage(IPLock.lang.get("confirm_nothing"));
+                sender.sendMessage(SillinessLimiter.lang.get("confirm_nothing"));
                 return true;
             }
-            Object value = confirmations.get(p);
+
             Object out = null;
+            Object raw = confirmations.get(p);
+            String PlayerName = p.getName();
+            String current_ip = p.getAddress().getAddress().getHostAddress();
             String key = "";
             String msg = "";
             String log_msg = "";
-            if (value instanceof String || value == null) {
-                if(value == null || this.ip_pattern.matcher((String)value).matches()) {
-                    if (value == null) ip.remove(p.getAddress().getAddress().getHostAddress());
+            if(raw == null || raw instanceof String) {
+                String value = (String) raw;
+                if(value == null || this.ip_pattern.matcher(value).matches()) {
+                    if (value == null) ip.remove(current_ip);
                     else if (ip != null && ip.contains(value)) {
                         ip.remove(value);
                     } else {
@@ -51,38 +54,38 @@ public class sillyconfirm implements CommandExecutor {
 
                     if (ip.isEmpty()) ip = null;
 
-                    key = p.getName();
+                    key = PlayerName;
                     out = ip;
 
-                    msg = (ip != null && ip.contains(value)) ? IPLock.lang.get("limit_success") : IPLock.lang.get("unlimit_success");
-                    log_msg = p.getName() + ((value != null) ? " has been linked" : " has been unlinked");
+                    msg = (ip != null && ip.contains(value)) ? SillinessLimiter.lang.get("limit_success") : SillinessLimiter.lang.get("unlimit_success");
+                    log_msg = PlayerName + ((value != null) ? " has been linked" : " has been unlinked");
                 } else {
-                    key = p.getName() + ";dynamic";
+                    key = PlayerName + ";dynamic";
                     out = value;
 
-                    Object check = IPLock.pdata.get(key);
+                    Object check = SillinessLimiter.udata.getDynamicIP(PlayerName);
                     if(check != null) out = null;
 
-                    msg = check != null ? IPLock.lang.get("dynamic_unlimit_success") : IPLock.lang.get("dynamic_success") ;
-                    log_msg = check != null ? p.getName() + " has unlinked dynamic ip" : p.getName() + " has linked dynamic ip";
+                    msg = check != null ? SillinessLimiter.lang.get("dynamic_unlimit_success") : SillinessLimiter.lang.get("dynamic_success") ;
+                    log_msg = check != null ? PlayerName + " has unlinked dynamic ip" : PlayerName + " has linked dynamic ip";
                 }
 
-            } else if (value instanceof Boolean) {
-                key = p.getName() + ";enabled";
+            } else if(raw instanceof Boolean value) {
+                key = PlayerName + ";enabled";
                 out = value;
 
-                msg = (boolean)value ? IPLock.lang.get("auth_enable") : IPLock.lang.get("auth_disable");
-                log_msg = p.getName() + ((boolean)value ? " enabled " : " disabled ") + "their auth";
+                msg = value ? SillinessLimiter.lang.get("auth_enable") : SillinessLimiter.lang.get("auth_disable");
+                log_msg = PlayerName + (value ? " enabled " : " disabled ") + "their auth";
             }
 
-            IPLock.pdata.set(key, out);
-            IPLock.pdata.save();
+            SillinessLimiter.udata.set(key, out);
+            SillinessLimiter.udata.save();
 
             p.sendMessage(msg);
-            IPLock.log.info(log_msg);
+            SillinessLimiter.log.info(log_msg);
 
-            if (this.plugin.getConfig().getBoolean("check-after-confirm") && IPLock.pdata.isEnabled(p.getName())) {
-                if(IPLock.checkIP(p.getName(), p.getAddress().getAddress().getHostAddress())) p.kickPlayer(IPLock.lang.get("kick_reason"));
+            if (this.plugin.getConfig().getBoolean("check-after-confirm") && SillinessLimiter.udata.isEnabled(PlayerName)) {
+                if(SillinessLimiter.IPNotLinked(PlayerName, current_ip)) p.kickPlayer(SillinessLimiter.lang.get("kick_reason"));
             }
 
             confirmations.remove(p);

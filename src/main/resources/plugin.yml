@@ -1,6 +1,6 @@
 name: SillinessLimiter
 version: '${project.version}'
-main: nnhomoli.sillinesslimiter.IPLock
+main: nnhomoli.sillinesslimiter.SillinessLimiter
 api-version: '1.20'
 commands:
     silly-limit:
@@ -12,7 +12,7 @@ commands:
         usage: /silly-unlimit
         permission: nnhomoli.sillinesslimiter.cmds.sillyunlimit
     silly-reload:
-        description: "Reload SillinessLimiter config and language"
+        description: "Reload SillinessLimiter Config, Language, PlayerData or all of them"
         usage: /silly-reload
         permission: nnhomoli.sillinesslimiter.cmds.sillyreload
     silly-confirm:
