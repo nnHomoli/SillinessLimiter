@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 import static nnhomoli.sillinesslimiter.misc.ConfirmationTimeout.Timeout;
 
 public class sillyconfirm implements CommandExecutor {
-    private SillinessLimiter plugin;
+    private final SillinessLimiter plugin;
     private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -23,9 +23,7 @@ public class sillyconfirm implements CommandExecutor {
 
     public static final HashMap<Player, Object> confirmations = new HashMap<>();
 
-    public sillyconfirm(SillinessLimiter plugin) {
-        this.plugin = plugin;
-    }
+    public sillyconfirm(SillinessLimiter plugin) {this.plugin = plugin;}
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {

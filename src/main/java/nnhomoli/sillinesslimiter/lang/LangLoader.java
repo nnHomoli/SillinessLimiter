@@ -38,7 +38,7 @@ public class LangLoader {
         put("%RESET%", ChatColor.RESET);
     }};
     private final HashMap<String,String> map = new HashMap<>();
-    private SillinessLimiter plugin;
+    private final SillinessLimiter plugin;
 
     public LangLoader(SillinessLimiter plugin) { this.plugin = plugin; }
 
