@@ -20,17 +20,6 @@ public final class SillinessLimiter extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        try {
-            Properties props = new Properties();
-            props.load(new FileInputStream("server.properties"));
-            if(props.getProperty("online-mode").equals("true")) {
-                log.info("Online mode detected, automatically disabling " + this.getName());
-                this.getServer().getPluginManager().disablePlugin(this);
-                return;
-            }
-        } catch(Exception e) {
-            log.info("Failed to check online mode:\n" + e.getMessage());
-        }
 
         this.getCommand("silly-limit").setExecutor(new sillylimit(this));
         this.getCommand("silly-unlimit").setExecutor(new sillyunlimit());
