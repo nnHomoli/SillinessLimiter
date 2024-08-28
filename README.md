@@ -7,7 +7,7 @@ of how they want to secure their account on an offline server while also not bei
 
 Also includes customizable language file and dynamic IP support
 
-Tested on 1.20-1.21 
+This plugin doesn't use any of the nms stuff so it should work on other versions too, however tested versions can be found on [Modrinth page](https://modrinth.com/plugin/sillinesslimiter/versions)
 
 ![kick-example.jpg](kick-example.jpg)
 
