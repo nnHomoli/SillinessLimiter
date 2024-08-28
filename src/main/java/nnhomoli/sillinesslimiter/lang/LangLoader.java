@@ -6,7 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.HashMap;
 
@@ -36,16 +38,21 @@ public class LangLoader {
         put("%RESET%", ChatColor.RESET);
     }};
     private final HashMap<String,String> map = new HashMap<>();
+    private SillinessLimiter plugin;
 
-    public void load(SillinessLimiter plugin) {
+    public LangLoader(SillinessLimiter plugin) { this.plugin = plugin; }
+
+    public void load() {
         File f = new File(plugin.getDataFolder() + "/lang.yml");
-        if(!f.exists()) {
-            try {
+        try {
+            if(!f.exists()) {
                 InputStream in = plugin.getResource("default/lang.yml");
                 Files.copy(in, f.toPath());
-            } catch (Exception e) {
-                SillinessLimiter.log.info("Failed to copy default language file:\n" + e);
+            } else {
+                Update(f);
             }
+        } catch (Exception e) {
+            SillinessLimiter.log.info("Failed to copy/update language file:\n" + e);
         }
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(f);
         for(String key : yaml.getKeys(false)) {
@@ -56,12 +63,26 @@ public class LangLoader {
         }
 
     }
+
+    public void Update(File f) throws IOException {
+        if(f.exists()) {
+            YamlConfiguration existent = YamlConfiguration.loadConfiguration(f);
+            YamlConfiguration needed = YamlConfiguration.loadConfiguration(new InputStreamReader(plugin.getResource("default/lang.yml")));
+            needed.getKeys(false).forEach(key -> {
+                if(existent.get(key) == null) {
+                    existent.set(key, needed.get(key));
+                }
+            });
+            existent.save(f);
+        }
+    }
+
     public String get(String key) {
         return map.get(key);
     }
 
     public void reload() {
         map.clear();
-        load(SillinessLimiter.getPlugin(SillinessLimiter.class));
+        load();
     }
 }

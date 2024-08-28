@@ -61,7 +61,7 @@ ___
 ## **Config**
 
 #### _Permission-by-default_ ## true/false
--- grants every permission of this plugin commands, except reload, true by default
+-- Grants every permission of this plugin commands, except reload, true by default
 
 #### _Login-link-message_ ## true/false
 -- Display a message when player whose IP is not linked joins, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
@@ -71,6 +71,9 @@ ___
 
 #### _check-after-confirm_ ## true/false
 -- Check if player IP is still linked after confirm, false by default
+
+#### _confirmation-timeout_ ## Int value
+-- Time in seconds after which player confirmation request will be removed , 180 by default
 
 ## Language
 -- For more info about this one, check [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml)
@@ -84,7 +87,3 @@ ___
 -- **modrinth:** 
 
 https://modrinth.com/plugin/sillinesslimiter
-
--- **planetminecraft**: 
-
-https://www.planetminecraft.com/mod/sillinesslimiter-a-little-strange-ip-based-auth-bukkit-1-20-4-120-6/
