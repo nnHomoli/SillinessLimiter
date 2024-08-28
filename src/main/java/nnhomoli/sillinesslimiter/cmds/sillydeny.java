@@ -7,12 +7,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static nnhomoli.sillinesslimiter.misc.ConfirmationTimeout.Timeout;
+
 public class sillydeny implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if(sender instanceof Player p) {
             if (sillyconfirm.confirmations.containsKey(p)) {
                 sillyconfirm.confirmations.remove(p);
+                Timeout.remove(p);
                 p.sendMessage(SillinessLimiter.lang.get("deny"));
             } else p.sendMessage(SillinessLimiter.lang.get("deny_nothing"));
         }

@@ -94,6 +94,7 @@ bottom: "%GOLD%\n⏷ ======|%AUTHSTATUS%%RESET%%GOLD%|======"
 ##misc
 kick_reason:  "%RED%%BOLD%Trying to limit ur silliness\n\n%AQUA% U joined the account with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
 login_link_message: "%RED%Ur IP is not linked, ur progress might be at risk, use %BOLD%/silly-help%RESET%%RED% for more info on how to secure ur account"
+timeout: "%RED%%BOLD%Ur request have been timed out"
 
 plugin_reload: "%GOLD%%BOLD%Reloaded the silly"
 

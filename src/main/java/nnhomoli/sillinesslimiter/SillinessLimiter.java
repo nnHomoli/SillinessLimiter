@@ -2,12 +2,12 @@ package nnhomoli.sillinesslimiter;
 
 import nnhomoli.sillinesslimiter.data.*;
 import nnhomoli.sillinesslimiter.cmds.*;
-import nnhomoli.sillinesslimiter.misc.Listener;
+import nnhomoli.sillinesslimiter.misc.*;
 import nnhomoli.sillinesslimiter.lang.LangLoader;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.FileInputStream;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -32,6 +32,7 @@ public final class SillinessLimiter extends JavaPlugin {
         this.getCommand("silly-dynamic-unlimit").setExecutor(new sillydynamicunlimit());
         this.getCommand("silly-help").setExecutor(new sillyhelp());
 
+        Bukkit.getScheduler().runTaskTimer(this, new ConfirmationTimeout(this), 0, 20);
 
         getServer().getPluginManager().registerEvents(new Listener(this), this);
     }
@@ -41,8 +42,8 @@ public final class SillinessLimiter extends JavaPlugin {
         // Plugin load logic
         log = this.getLogger();
 
-        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2.2")) {
-            this.getConfig().set("version", "1.2.2");
+        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2.3")) {
+            this.getConfig().set("version", "1.2.3");
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
         if(this.getConfig().get("Permission-by-default") == null) {
@@ -61,12 +62,16 @@ public final class SillinessLimiter extends JavaPlugin {
             this.getConfig().set("check-after-confirm", false);
             this.getConfig().setComments("check-after-confirm", List.of("Check if player ip is still linked after confirm, false by default"));
         }
+        if(this.getConfig().get("confirmation-timeout") == null) {
+            this.getConfig().set("confirmation-timeout", 180);
+            this.getConfig().setComments("confirmation-timeout", List.of("Timeout confirmation requests in seconds, 180 by default"));
+        }
 
         this.saveConfig();
         this.reloadConfig();
 
-        lang = new LangLoader();
-        lang.load(this);
+        lang = new LangLoader(this);
+        lang.load();
 
         udata = new data();
         udata.load(this);
@@ -83,9 +88,9 @@ public final class SillinessLimiter extends JavaPlugin {
         log.info(this.getName() + " Has been unloaded");
     }
 
-    public static boolean IPNotLinked(String PlayerName, String IP) {
-        String dynamic = SillinessLimiter.udata.getDynamicIP(PlayerName);
-        List<Object> ip = SillinessLimiter.udata.getList(PlayerName);
+    public static boolean isAllowed(String PlayerName, String IP) {
+        String dynamic = udata.getDynamicIP(PlayerName);
+        List<Object> ip = udata.getList(PlayerName);
 
         boolean allow = false;
         if(dynamic != null) {
@@ -94,6 +99,9 @@ public final class SillinessLimiter extends JavaPlugin {
         if(ip != null) {
             if(ip.contains(IP)) allow = true;
         }
-        return !allow;
+        if(!udata.isEnabled(PlayerName) || udata.isEnabled(PlayerName) && ip == null && dynamic == null) {
+            allow = true;
+        }
+        return allow;
     }
 }

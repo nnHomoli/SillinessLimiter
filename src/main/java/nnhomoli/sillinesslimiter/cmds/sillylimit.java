@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class sillylimit implements CommandExecutor, TabCompleter {
-    private final SillinessLimiter plugin;
+    private SillinessLimiter plugin;
     private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +

@@ -1,10 +1,10 @@
-##This is a data file that contains player data
-##---------------------------------------------
-##Auth status
+#This is a data file that contains player data
+#---------------------------------------------
+#Auth status
 Steve;enabled: true
-##normal ip
+#normal ip
 Steve:
   - 127.0.0.1
-##dynamic ip
+#dynamic ip
 Steve;dynamic: 127.0.*
 

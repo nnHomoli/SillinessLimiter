@@ -54,7 +54,7 @@ public class Listener implements org.bukkit.event.Listener {
         converter.convert(p, this.plugin);
 
         if(SillinessLimiter.udata.isEnabled(p)) {
-            if (SillinessLimiter.IPNotLinked(p, event.getAddress().getHostAddress())) {
+            if (!SillinessLimiter.isAllowed(p, event.getAddress().getHostAddress())) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, lang.get("kick_reason"));
             }
         }

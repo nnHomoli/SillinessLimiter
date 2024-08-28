@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class sillyreload implements CommandExecutor, TabCompleter {
-    private final SillinessLimiter plugin;
+    private SillinessLimiter plugin;
 
     public sillyreload(SillinessLimiter plugin) {
         this.plugin = plugin;

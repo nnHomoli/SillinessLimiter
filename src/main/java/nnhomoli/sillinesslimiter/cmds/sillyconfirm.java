@@ -12,8 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static nnhomoli.sillinesslimiter.misc.ConfirmationTimeout.Timeout;
+
 public class sillyconfirm implements CommandExecutor {
-    private final SillinessLimiter plugin;
+    private SillinessLimiter plugin;
     private final Pattern ip_pattern = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
             "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -85,10 +87,11 @@ public class sillyconfirm implements CommandExecutor {
             SillinessLimiter.log.info(log_msg);
 
             if (this.plugin.getConfig().getBoolean("check-after-confirm") && SillinessLimiter.udata.isEnabled(PlayerName)) {
-                if(SillinessLimiter.IPNotLinked(PlayerName, current_ip)) p.kickPlayer(SillinessLimiter.lang.get("kick_reason"));
+                if(!SillinessLimiter.isAllowed(PlayerName, current_ip)) p.kickPlayer(SillinessLimiter.lang.get("kick_reason"));
             }
 
             confirmations.remove(p);
+            Timeout.remove(p);
         }
         return true;
     }
