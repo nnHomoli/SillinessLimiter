@@ -81,9 +81,3 @@ ___
 ## Player data
 -- For more info about this one, check [data.yml](src%2Fmain%2Fresources%2Fdefault%2Fdata.yml)
 
-___
-# **Official pages**
-
--- **modrinth:** 
-
-https://modrinth.com/plugin/sillinesslimiter
