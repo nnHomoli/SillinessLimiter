@@ -6,10 +6,8 @@ import nnhomoli.sillinesslimiter.misc.*;
 import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -44,7 +42,7 @@ public final class SillinessLimiter extends JavaPlugin {
     public void onLoad() {
         // Plugin load logic
         log = this.getLogger();
-        version = YamlConfiguration.loadConfiguration(new InputStreamReader((this.getResource("misc/version.yml")))).getString("version");
+        version = this.getDescription().getVersion();
 
         if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals(version)) {
             this.getConfig().set("version", version);
