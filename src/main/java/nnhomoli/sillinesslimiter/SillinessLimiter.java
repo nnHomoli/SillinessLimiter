@@ -6,8 +6,10 @@ import nnhomoli.sillinesslimiter.misc.*;
 import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -15,6 +17,7 @@ public final class SillinessLimiter extends JavaPlugin {
     public static Logger log;
     public static data udata;
     public static LangLoader lang;
+    public static String version;
 
 
     @Override
@@ -41,9 +44,10 @@ public final class SillinessLimiter extends JavaPlugin {
     public void onLoad() {
         // Plugin load logic
         log = this.getLogger();
+        version = YamlConfiguration.loadConfiguration(new InputStreamReader((this.getResource("misc/version.yml")))).getString("version");
 
-        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals("1.2.3")) {
-            this.getConfig().set("version", "1.2.3");
+        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals(version)) {
+            this.getConfig().set("version", version);
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
         if(this.getConfig().get("Permission-by-default") == null) {
@@ -76,8 +80,7 @@ public final class SillinessLimiter extends JavaPlugin {
         udata = new data();
         udata.load(this);
 
-        log.info(this.getName() + " Has been loaded");
-
+        log.info(this.getName() + " " + version + " Has been loaded");
     }
 
     @Override
@@ -85,7 +88,7 @@ public final class SillinessLimiter extends JavaPlugin {
         // Plugin shutdown logic
         udata.save();
 
-        log.info(this.getName() + " Has been unloaded");
+        log.info(this.getName() + " " + version + " Has been unloaded");
     }
 
     public static boolean isAllowed(String PlayerName, String IP) {
