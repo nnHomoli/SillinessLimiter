@@ -54,7 +54,7 @@ public final class SillinessLimiter extends JavaPlugin {
         }
         if(this.getConfig().get("Login-link-message") == null) {
             this.getConfig().set("Login-link-message", true);
-            this.getConfig().setComments("Login-link-message", List.of("Display a message when you join if player ip is not linked, can be changed in lang.yml, true by default"));
+            this.getConfig().setComments("Login-link-message", List.of("Display a message when the player joins without linked IP, this can be changed in lang.yml. True by default"));
         }
         if(this.getConfig().get("Max-IP-Allowed") == null) {
             this.getConfig().set("Max-IP-Allowed", 4);
