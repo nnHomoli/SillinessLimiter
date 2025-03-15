@@ -1,0 +1,40 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron:  '43 1 15,25 * *'
+    
+jobs:
+  Automated-Build-Test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Apply unique version to pom
+      uses: nnHomoli/MinecraftAutomation/.github/actions/unique-version-pom@master
+    - name: Set up JDK 17 to build
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: Build with Maven
+      id: build
+      run: mvn clean -B package --file pom.xml
+    - name: Simple test on latest PurpurMC server
+      uses: nnHomoli/MinecraftAutomation/.github/actions/server-run@master
+      with:
+        path_plugin: output
+        commands: |
+          pl
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SillinessLimiter
+        path: output
+        if-no-files-found: error
+        retention-days: 20
