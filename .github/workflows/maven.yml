@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Apply unique version to pom
-      uses: nnHomoli/MinecraftAutomation/.github/actions/unique-version-pom@master
+      uses: nnHomoli/McAutomation/.github/actions/unique-version-pom@master
     - name: Set up JDK 17 to build
       uses: actions/setup-java@v4
       with:
@@ -25,7 +25,7 @@ jobs:
       id: build
       run: mvn clean -B package --file pom.xml
     - name: Simple test on latest PurpurMC server
-      uses: nnHomoli/MinecraftAutomation/.github/actions/server-run@master
+      uses: nnHomoli/McAutomation/.github/actions/server-run@master
       with:
         path_plugin: output
         commands: |
