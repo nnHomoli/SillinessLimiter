@@ -9,42 +9,32 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 public final class SillinessLimiter extends JavaPlugin {
-    public static Logger log;
-    public static data udata;
-    public static LangLoader lang;
-    public static String version;
-
+    private final userdata data = new userdata(this);
+    private final LangLoader lang = new LangLoader(this);
+    private final String version = getDescription().getVersion();
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        Objects.requireNonNull(this.getCommand("silly-limit")).setExecutor(new sillylimit(this,data,lang));
+        Objects.requireNonNull(this.getCommand("silly-unlimit")).setExecutor(new sillyunlimit(data,lang));
+        Objects.requireNonNull(this.getCommand("silly-confirm")).setExecutor(new sillyconfirm(this,lang,data));
+        Objects.requireNonNull(this.getCommand("silly-deny")).setExecutor(new sillydeny(lang,data));
+        Objects.requireNonNull(this.getCommand("silly-switch")).setExecutor(new sillyswitch(data,lang));
+        Objects.requireNonNull(this.getCommand("silly-reload")).setExecutor(new sillyreload(this,data,lang));
+        Objects.requireNonNull(this.getCommand("silly-list")).setExecutor(new sillylist(data,lang));
+        Objects.requireNonNull(this.getCommand("silly-dynamic-limit")).setExecutor(new sillydynamiclimit(data,lang));
+        Objects.requireNonNull(this.getCommand("silly-dynamic-unlimit")).setExecutor(new sillydynamicunlimit(data,lang));
+        Objects.requireNonNull(this.getCommand("silly-help")).setExecutor(new sillyhelp(lang));
 
-        this.getCommand("silly-limit").setExecutor(new sillylimit(this));
-        this.getCommand("silly-unlimit").setExecutor(new sillyunlimit());
-        this.getCommand("silly-confirm").setExecutor(new sillyconfirm(this));
-        this.getCommand("silly-deny").setExecutor(new sillydeny());
-        this.getCommand("silly-switch").setExecutor(new sillyswitch());
-        this.getCommand("silly-reload").setExecutor(new sillyreload(this));
-        this.getCommand("silly-list").setExecutor(new sillylist());
-        this.getCommand("silly-dynamic-limit").setExecutor(new sillydynamiclimit());
-        this.getCommand("silly-dynamic-unlimit").setExecutor(new sillydynamicunlimit());
-        this.getCommand("silly-help").setExecutor(new sillyhelp());
+        Bukkit.getScheduler().runTaskTimer(this, new ConfirmationTimeout(this,lang,data), 0, 20);
 
-        Bukkit.getScheduler().runTaskTimer(this, new ConfirmationTimeout(this), 0, 20);
-
-        getServer().getPluginManager().registerEvents(new Listener(this), this);
+        getServer().getPluginManager().registerEvents(new Listener(this,lang,data), this);
     }
 
-    @Override
-    public void onLoad() {
-        // Plugin load logic
-        log = this.getLogger();
-        version = this.getDescription().getVersion();
-
-        if(this.getConfig().get("version") == null || !this.getConfig().get("version").equals(version)) {
+    public void SetupConfig() {
+        if(this.getConfig().get("version") == null || !Objects.equals(this.getConfig().get("version"), version)) {
             this.getConfig().set("version", version);
             this.getConfig().setComments("version", List.of("Official repository: https://github.com/nnHomoli/SillinessLimiter"));
         }
@@ -58,7 +48,7 @@ public final class SillinessLimiter extends JavaPlugin {
         }
         if(this.getConfig().get("Max-IP-Allowed") == null) {
             this.getConfig().set("Max-IP-Allowed", 4);
-            this.getConfig().setComments("Max-IP-Allowed", List.of("The maximum number of ip that can be linked to the same name, 4 by default"));
+            this.getConfig().setComments("Max-IP-Allowed", List.of("The maximum number of ip that can be linked to the same nickname, 4 by default"));
         }
         if(this.getConfig().get("check-after-confirm") == null) {
             this.getConfig().set("check-after-confirm", false);
@@ -68,41 +58,18 @@ public final class SillinessLimiter extends JavaPlugin {
             this.getConfig().set("confirmation-timeout", 180);
             this.getConfig().setComments("confirmation-timeout", List.of("Timeout confirmation requests in seconds, 180 by default"));
         }
-
         this.saveConfig();
-        this.reloadConfig();
+    }
 
-        lang = new LangLoader(this);
-        lang.load();
-
-        udata = new data();
-        udata.load(this);
-
-        log.info(this.getName() + " " + version + " Has been loaded");
+    @Override
+    public void onLoad() {
+        SetupConfig();
+        getLogger().info(this.getName() + " " + version + " Has been loaded");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
-        udata.save();
-
-        log.info(this.getName() + " " + version + " Has been unloaded");
-    }
-
-    public static boolean isAllowed(String PlayerName, String IP) {
-        String dynamic = udata.getDynamicIP(PlayerName);
-        List<Object> ip = udata.getList(PlayerName);
-
-        boolean allow = false;
-        if(dynamic != null) {
-            if(IP.contains(dynamic.replace("*", ""))) allow = true;
-        }
-        if(ip != null) {
-            if(ip.contains(IP)) allow = true;
-        }
-        if(!udata.isEnabled(PlayerName) || udata.isEnabled(PlayerName) && ip == null && dynamic == null) {
-            allow = true;
-        }
-        return allow;
+        data.save();
+        getLogger().info(this.getName() + " " + version + " Has been unloaded");
     }
 }

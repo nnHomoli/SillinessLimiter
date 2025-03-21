@@ -44,8 +44,8 @@ confirm_busy: "%RED%%BOLD%U have yet to confirm or deny the previous change"
 confirm_nothing: "%RED%Nothing to confirm %DARK_RED%>:("
 
 ##silly-switch
-switch_to_true: "%YELLOW%Are u sure u want to change ur account %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %GREEN%%BOLD%enabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-switch_to_false: "%YELLOW%Are u sure u want to change ur account %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %RED%%BOLD%disabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+switch_to_true: "%YELLOW%Are u sure u want to change ur nickname %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %GREEN%%BOLD%enabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+switch_to_false: "%YELLOW%Are u sure u want to change ur nickname %GOLD%%BOLD%auth%RESET%%YELLOW% status\nto %RED%%BOLD%disabled%RESET%%YELLOW%?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 auth_enable: "%GOLD%OK, Auth has been %GREEN%%BOLD%enabled"
 auth_disable: "%GOLD%OK, Auth has been %RED%%BOLD%disabled"
@@ -54,8 +54,8 @@ auth_disable: "%GOLD%OK, Auth has been %RED%%BOLD%disabled"
 unlimit_fail: "%AQUA%Bwomp-Bwomp, %GOLD%no silliness to %BOLD%unlimit"
 unlimit_success: "%LIGHT_PURPLE%yaaaay, %GOLD%silliness has been %BOLD%unlimited"
 
-unlimit_this: "%YELLOW%Are u sure u want to unlink ur current %RED%%BOLD%address%RESET%%YELLOW%\nfrom ur account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-unlimit_that: "%YELLOW%Are u sure u want to unlink this %RED%%BOLD%address%RESET%%YELLOW%\nfrom ur account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+unlimit_this: "%YELLOW%Are u sure u want to unlink ur current %RED%%BOLD%address%RESET%%YELLOW%\nfrom ur nickname?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+unlimit_that: "%YELLOW%Are u sure u want to unlink this %RED%%BOLD%address%RESET%%YELLOW%\nfrom ur nickname?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 ##silly-dynamic-limit
 dynamic_already_there: "%RED%No i don't think so,\n%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been dynamically %BOLD%limited%RESET%%GOLD% there"
@@ -63,14 +63,15 @@ dynamic_success: "%LIGHT_PURPLE%yaaaay, %GOLD%silliness has been %BOLD%limited%R
 
 invalid_dynamic_ip: "%RED%%BOLD%Invalid dynamic IP address %DARK_RED%>:(%RESET%%RED%\nplease use asterisk ( * ) after %BOLD%first/second/third%RESET%%RED% octets"
 
-dynamic_limit_this: "%YELLOW%Are u sure u want to link ur current %RED%%BOLD%address%RESET%%YELLOW%\nto ur account as dynamic IP?%DARK_RED%\nBy using this option, it will be defaulted\nto the second octet of ur current one%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-dynamic_limit_that: "%YELLOW%Are u sure u want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto ur account as dynamic IP?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+dynamic_limit_this: "%YELLOW%Are u sure u want to link ur current %RED%%BOLD%address%RESET%%YELLOW%\nto ur nickname as dynamic IP?%DARK_RED%\nBy using this option, it will be defaulted\nto the second octet of ur current one%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+dynamic_limit_that: "%YELLOW%Are u sure u want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto ur nickname as dynamic IP?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+dynamic_unsupported: "%YELLOW%IPv6 is %RED%%ITALIC%unsupported"
 
 ##silly-dynamic-unlimit
 dynamic_unlimit_not_linked: "%AQUA%Bwomp-Bwomp, %GOLD%no silliness to %BOLD%unlimit%RESET%%GOLD% dynamically"
 dynamic_unlimit_success: "%LIGHT_PURPLE%yaaaay, %GOLD%silliness has been %BOLD%unlimited%RESET%%GOLD% dynamically"
 
-dynamic_unlimit: "%YELLOW%Are u sure u want to unlink ur current %RED%%BOLD%\ndynamic address%RESET%%YELLOW%\nfrom ur account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+dynamic_unlimit: "%YELLOW%Are u sure u want to unlink ur current %RED%%BOLD%\ndynamic address%RESET%%YELLOW%\nfrom ur nickname?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 ##silly-limit
 invalid_ip: "%RED%%BOLD%Invalid IP address %DARK_RED%>:("
@@ -78,27 +79,27 @@ invalid_ip: "%RED%%BOLD%Invalid IP address %DARK_RED%>:("
 limit_already_there: "%RED%No i don't think so,\n%GOLD%Silliness has %RED%%BOLD%already%RESET%%GOLD% been %BOLD%limited%RESET%%GOLD% there"
 limit_success: "%LIGHT_PURPLE%yaaaay, %GOLD%silliness has been %BOLD%limited"
 
-limit_this: "%YELLOW%Are u sure u want to link ur current %RED%%BOLD%address%RESET%%YELLOW%\nto ur account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
-limit_that: "%YELLOW%Are u sure u want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto ur account?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+limit_this: "%YELLOW%Are u sure u want to link ur current %RED%%BOLD%address%RESET%%YELLOW%\nto ur nickname?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
+limit_that: "%YELLOW%Are u sure u want to link this %RED%%BOLD%address%RESET%%YELLOW%\nto ur nickname?%GOLD%\nIf so, please use %AQUA%%BOLD%/silly-confirm%RESET% %GOLD%or %AQUA%%BOLD%/silly-deny"
 
 ## Silly-list menu
 header: "%GOLD%⏶ ====================="
 
 ips: "%AQUA%|| %DARK_AQUA%%BOLD% %IP%"
-no_ips: "%RED%|| %DARK_RED%%BOLD% No IPS linked"
+no_ips: "%RED%|| %DARK_RED%%BOLD% No IPs linked"
 dynamic_ip: "%AQUA%|| %BLUE%%BOLD%%MAGIC% !!  %BLUE%%BOLD%%IPD% -- dynamic %MAGIC%!!"
 no_dynamic_ip: "%RED%|| %DARK_RED%%BOLD% no dynamic IPS linked"
 
 bottom: "%GOLD%\n⏷ ======|%AUTHSTATUS%%RESET%%GOLD%|======"
 
 ##misc
-kick_reason:  "%RED%%BOLD%Trying to limit ur silliness\n\n%AQUA% U joined the account with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
-login_link_message: "%RED%Ur IP is not linked, ur progress might be at risk, use %BOLD%/silly-help%RESET%%RED% for more info on how to secure ur account"
+kick_reason:  "%RED%%BOLD%Trying to limit ur silliness\n\n%AQUA% U joined the nickname with %UNDERLINE%other ip%RESET%%AQUA% already linked to it"
+login_link_message: "%RED%Ur IP is not linked, ur progress might be at risk, use %BOLD%/silly-help%RESET%%RED% for more info on how to secure ur nickname"
 timeout: "%RED%%BOLD%Ur request have been timed out"
 
 plugin_reload: "%GOLD%%BOLD%Reloaded the silly"
 
-maximum_reached: "%RED%No i don't think so,\nU have reached the maximum number of %BOLD%IPs%RESET%%RED% that can be linked to the same account"
+maximum_reached: "%RED%No i don't think so,\nU have reached the maximum number of %BOLD%IPs%RESET%%RED% that can be linked to the same nickname"
 
 auth_on: "%GREEN%%BOLD%enabled"
 auth_off: "%RED%%BOLD%disabled"

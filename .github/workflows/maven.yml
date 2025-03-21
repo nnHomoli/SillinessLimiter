@@ -15,10 +15,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: Apply unique version to pom
       uses: nnHomoli/McAutomation/.github/actions/unique-version-pom@master
-    - name: Set up JDK 17 to build
+    - name: Set up JDK 21 to build
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven

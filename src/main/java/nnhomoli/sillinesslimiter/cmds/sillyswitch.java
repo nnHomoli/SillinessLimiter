@@ -1,30 +1,40 @@
 package nnhomoli.sillinesslimiter.cmds;
 
-import nnhomoli.sillinesslimiter.SillinessLimiter;
+import nnhomoli.sillinesslimiter.data.userdata;
+import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class sillyswitch implements CommandExecutor {
+import javax.annotation.Nonnull;
+
+public final class sillyswitch implements CommandExecutor {
+    private final userdata user;
+    private final LangLoader lang;
+    public sillyswitch(userdata d, LangLoader l) {
+        this.user = d;
+        this.lang = l;
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+    public boolean onCommand(@Nonnull final CommandSender sender, @Nonnull final Command command, @Nonnull final String s,@Nonnull final String[] strings) {
         if(sender instanceof Player p) {
-            if (sillyconfirm.confirmations.containsKey(p)) {
-                p.sendMessage(SillinessLimiter.lang.get("confirm_busy"));
+            if (user.confirmationContainsPlayer(p)) {
+                p.sendMessage(lang.getString("confirm_busy"));
                 return true;
             }
 
             boolean out;
-            if(SillinessLimiter.udata.isEnabled(p.getName())) {
-                sillyconfirm.confirmations.put(p, false);
+            if(user.isEnabled(p.getName())) {
+                user.setConfirmation(p, false);
                 out = false;
             } else {
-                sillyconfirm.confirmations.put(p, true);
+                user.setConfirmation(p, true);
                 out = true;
             }
-            p.sendMessage(SillinessLimiter.lang.get(out ? "switch_to_true" : "switch_to_false"));
+            p.sendMessage(lang.getString(out ? "switch_to_true" : "switch_to_false"));
         }
         return true;
     }

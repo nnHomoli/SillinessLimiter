@@ -1,23 +1,29 @@
 package nnhomoli.sillinesslimiter.cmds;
 
-import nnhomoli.sillinesslimiter.SillinessLimiter;
+import nnhomoli.sillinesslimiter.data.userdata;
+import nnhomoli.sillinesslimiter.lang.LangLoader;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static nnhomoli.sillinesslimiter.misc.ConfirmationTimeout.Timeout;
+import javax.annotation.Nonnull;
 
-public class sillydeny implements CommandExecutor {
+public final class sillydeny implements CommandExecutor {
+    private final LangLoader lang;
+    private final userdata user;
+    public sillydeny(LangLoader l, userdata u) {
+        this.lang = l;
+        this.user = u;
+    }
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
+    public boolean onCommand(@Nonnull final CommandSender sender, @Nonnull final Command command, @Nonnull final String s, @Nonnull final String[] strings) {
         if(sender instanceof Player p) {
-            if (sillyconfirm.confirmations.containsKey(p)) {
-                sillyconfirm.confirmations.remove(p);
-                Timeout.remove(p);
-                p.sendMessage(SillinessLimiter.lang.get("deny"));
-            } else p.sendMessage(SillinessLimiter.lang.get("deny_nothing"));
+            if (user.confirmationContainsPlayer(p)) {
+                user.removeConfirmation(p);
+                p.sendMessage(lang.getString("deny"));
+            } else p.sendMessage(lang.getString("deny_nothing"));
         }
         return true;
     }
