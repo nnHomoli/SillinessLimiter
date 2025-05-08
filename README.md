@@ -87,7 +87,7 @@ Permission-by-defaul ## true/false
 ```
 Login-link-message ## true/false
 ```
-- Display a message when player whose IP is not linked joins, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
+- Display a message when the player joins without linked IP, this can be changed in lang.yml. True by default
 
 ```
 Max-IP-Allowed ## Int value
