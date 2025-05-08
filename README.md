@@ -14,65 +14,94 @@ However, tested versions can be found on [Modrinth page](https://modrinth.com/pl
 ![kick-example.jpg](kick-example.jpg)
 
 ## Commands
-
-#### _/silly-help_
+```
+/silly-help
+```
 - displays in-game command documentation, only including basic ones 
 ![help-example.jpg](help-example.jpg)
   
 permission: nnhomoli.sillinesslimiter.cmds.sillyhelp
-#### _/silly-limit_ 
+```
+/silly-limit
+```
 - links your nickname to IP address you are currently on, needs confirmation. Can be used with an argument to link a specific IP
 
 permission: nnhomoli.sillinesslimiter.cmds.sillylimit
-#### _/silly-unlimit_ 
+```
+/silly-unlimit
+```
 - if linked, it unlinks your nickname from the currently used IP and needs confirmation. Can be used with an argument to unlink a specific IP
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyunlimit
-#### _/silly-list_ 
+```
+/silly-list
+```
 - shows the list of linked IPs to your nickname
 ![](list-example.jpg)
 
 permission: nnhomoli.sillinesslimiter.cmds.sillylist
-#### _/silly-confirm_
+```
+/silly-confirm
+```
 - just to confirm changes, nothing else
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyconfirm
-#### _/silly-deny_
+```
+/silly-deny
+```
 - just to deny changes, nothing else
 
 permission: nnhomoli.sillinesslimiter.cmds.sillydeny
-#### _/silly-reload_
+```
+/silly-reload
+```
 - config and language reload, server op and console only
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyreload
-#### _/silly-switch_
+```
+/silly-switch
+```
 - switches the auth status for the user individually, needs confirmation
 
 permission: nnhomoli.sillinesslimiter.cmds.sillyswitch
-#### _/silly-dynamic-limit_
+```
+/silly-dynamic-limit
+```
 - links your nickname to the dynamic ip, supports arguments. If used without arguments, will default to the second octet of current IP, needs confirmation
 
 permission: nnhomoli.sillinesslimiter.cmds.sillydynamiclimit
-#### _/silly-dynamic-unlimit_
+```
+/silly-dynamic-unlimit
+```
 - unlinks the dynamic ip from your nickname, needs confirmation 
 
 permission: nnhomoli.sillinesslimiter.cmds.sillydynamicunlimit
 ___
 ## **Config**
 
-#### _Permission-by-default_ ## true/false
+```
+Permission-by-defaul ## true/false
+```
 - Grants every permission of this plugin commands, except reload, true by default
 
-#### _Login-link-message_ ## true/false
+```
+Login-link-message ## true/false
+```
 - Display a message when player whose IP is not linked joins, can be changed in [lang.yml](src%2Fmain%2Fresources%2Fdefault%2Flang.yml), true by default
 
-#### _Max-IP-Allowed_ ## Int value
+```
+Max-IP-Allowed ## Int value
+```
 - The maximum number of IP that can be linked to the same nickname, 4 by default
 
-#### _check-after-confirm_ ## true/false
+```
+check-after-confirm ## true/false
+```
 - Check if player IP is still linked after confirm, false by default
 
-#### _confirmation-timeout_ ## Int value
+```
+confirmation-timeout ## Int value
+```
 - Time in seconds after which player confirmation request will be removed , 180 by default
 
 ## Language
